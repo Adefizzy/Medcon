@@ -1,7 +1,8 @@
-import { OpeningScreening } from "./components/OpeningScreening";
-import {OnBoardingScreen1} from "./components/OnBoardingScreen1";
-import { OnBoardingScreen2 } from "./components/OnBoardingScreen2";
-import {OnBoardingScreen3} from './components/OnBoardingScreen3';
+import { OpeningScreening } from "./components/Onboarding/OpeningScreening";
+import {OnBoardingScreen1} from "./components/Onboarding/OnBoardingScreen1";
+import { OnBoardingScreen2 } from "./components/Onboarding/OnBoardingScreen2";
+import {OnBoardingScreen3} from './components/Onboarding/OnBoardingScreen3';
+import {UpcomingEventScaffold} from './components/Overview/UpcomingEventScaffold';
 import {Switch, Route} from 'react-router-dom';
 
 import {BrowserRouter as Router } from 'react-router-dom';
@@ -18,6 +19,9 @@ function App() {
        </Route>
        <Route path='/onboarding-provider-2'>
           <OnBoardingScreen3/>
+       </Route>
+       <Route path='/upcoming-event-past-session'>
+          <UpcomingEventScaffold/>
        </Route>
         <Route exact path='/'>
         <OpeningScreening/>

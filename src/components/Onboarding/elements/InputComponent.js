@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { device } from './../../globalAccets/breakbpoints';
-import {fontFamily} from './../../globalAccets/fontFamily';
+import { device } from '../../../globalAccets/breakbpoints';
+import {fontFamily} from '../../../globalAccets/fontFamily';
 
 
 export const InputComponent = (props) => {

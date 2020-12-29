@@ -1,13 +1,13 @@
 import React from 'react';
-import { OnBoardingScaffold } from './../components/layout/OnBoardingScaffold';
-import sideImage1 from './../globalAccets/images/sideImage1.png';
+import { OnBoardingScaffold } from './layout/OnBoardingScaffold';
+import sideImage1 from '../../globalAccets/images/sideImage1.png';
 import styled from 'styled-components';
-import { device } from './../globalAccets/breakbpoints';
-import buttonIcon from './../globalAccets/images/buttonIcon.png';
+import { device } from '../../globalAccets/breakbpoints';
+import buttonIcon from '../../globalAccets/images/buttonIcon.png';
 import {FiChevronRight} from 'react-icons/fi';
-import manIcon from './../globalAccets/images/man.png';
-import { theme } from './../globalAccets/theme';
-import {fontFamily} from './../globalAccets/fontFamily'
+import manIcon from '../../globalAccets/images/man.png';
+import { theme } from '../../globalAccets/theme';
+import {fontFamily} from '../../globalAccets/fontFamily'
 import {useHistory, useRouteMatch} from 'react-router-dom';
 
 export const OpeningScreening = (props) => {
@@ -52,6 +52,10 @@ const StyledButton = styled.div`
     border-radius: 10px;
     padding: 13px 14px;
     cursor: pointer;
+
+    &:hover{
+        border: 1px solid ${theme.primaryColor};
+    }
 
     &:nth-child(2){
         margin-top: 20px;

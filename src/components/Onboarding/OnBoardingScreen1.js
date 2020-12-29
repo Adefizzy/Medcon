@@ -1,11 +1,13 @@
 import React from 'react';
-import { OnBoardingScaffold } from './../components/layout/OnBoardingScaffold';
-import sideImage2 from './../globalAccets/images/sideImage2.png';
+import { OnBoardingScaffold } from './layout/OnBoardingScaffold';
+import sideImage2 from '../../globalAccets/images/sideImage2.png';
 import {InputComponent} from './elements/InputComponent';
 import { PrimaryButtonComponent } from './elements/PrimaryButtonComponent';
 import {BackButton} from './elements/BackButton';
 import { TextInput} from './elements/TextInput';
 import {DateInput} from './elements/DateInput';
+
+
 
 export const OnBoardingScreen1 = (props) => {
     return (

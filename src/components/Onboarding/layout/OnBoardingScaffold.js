@@ -1,44 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import bgImg from './../../globalAccets/images/bgImg.png';
-import {device} from './../../globalAccets/breakbpoints';
-import { Logo } from '../../globalAccets/svgs/Logo';
-import {fontFamily} from './../../globalAccets/fontFamily'
-import { theme } from '../../globalAccets/theme';
-import buttonIcon from './../../globalAccets/images/buttonIcon.png';
-import {FiChevronRight} from 'react-icons/fi';
-import manIcon from './../../globalAccets/images/man.png';
-import sideImage1 from './../../globalAccets/images/sideImage1.png';
+import bgImg from '../../../globalAccets/images/bgImg.png';
+import {device} from '../../../globalAccets/breakbpoints';
+import { Logo } from '../../../globalAccets/svgs/Logo';
+import {fontFamily} from '../../../globalAccets/fontFamily'
+import { theme } from '../../../globalAccets/theme';
 
 
 export const OnBoardingScaffold = (props) => {
-    const [logoDimention, setLogoDimention] = useState({width: '113', height: '31'});
- 
-     useEffect(() => {
-        window.addEventListener('load', () => {
-            if(window.innerWidth >= 1024){
-                let width = window.innerWidth * (10/100);
-                let height = window.innerHeight * (10/100);
     
-                setLogoDimention({width, height});
-            }
-        });
-
-        return () => window.removeEventListener('load', () => {
-            if(window.innerWidth >= 768){
-                let width = window.innerWidth * (10/100);
-                let height = window.innerHeight * (10/100);
-    
-                setLogoDimention({width, height});
-            }
-        });
-    }, [])  
     return (
         <StyledOnBoardingScaffold>
             <StyledLeftContainer>
 
                 <StyledTopDiv>
-                     <Logo width={logoDimention.width} height={logoDimention.height}/>
+                     <Logo /* width={logoDimention.width} height={logoDimention.height} *//>
             
                     <StyledOnBoardingTopText>
                         <h1>Welcome to <span>{props.segment}</span></h1>

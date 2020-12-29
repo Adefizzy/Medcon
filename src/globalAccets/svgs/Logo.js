@@ -1,8 +1,49 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export const Logo = (props) => {
+    const [logoDimention, setLogoDimention] = useState({width: '113', height: '31'});
+ 
+    useEffect(() => {
+       window.addEventListener('load', () => {
+           if(window.innerWidth >= 1024){
+               let width = window.innerWidth * (11/100);
+               let height = window.innerHeight * (11/100);
+   
+               setLogoDimention({width, height});
+           }
+       });
+
+       return () => window.removeEventListener('load', () => {
+           if(window.innerWidth >= 768){
+               let width = window.innerWidth * (11/100);
+               let height = window.innerHeight * (11/100);
+   
+               setLogoDimention({width, height});
+           }
+       });
+   }, []) 
+
+  /*  useEffect(() => {
+    window.addEventListener('resize', () => {
+        if(window.innerWidth >= 1024){
+            let width = window.innerWidth * (10/100);
+            let height = window.innerHeight * (10/100);
+
+            setLogoDimention({width, height});
+        }
+    });
+
+    return () => window.removeEventListener('resize', () => {
+        if(window.innerWidth >= 768){
+            let width = window.innerWidth * (10/100);
+            let height = window.innerHeight * (10/100);
+
+            setLogoDimention({width, height});
+        }
+    });
+}, []) */
     return (
-        <svg width={props.width}/* "113" */ height={props.height} /* "31" */ viewBox="0 0 113 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={logoDimention.width}/* "113" */ height={logoDimention.height} /* "31" */ viewBox='0 0 113 31' fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="30.0896" height="30.0896" rx="8.35821" fill="#F6A851"/>
             <path d="M22.5672 22.5672H7.52246V7.52246H22.5672V22.5672ZM8.30513 21.7846H21.7846V8.30513H8.30513V21.7846Z" fill="black"/>
             <path d="M11.2469 17.9235H11.5177C11.7183 17.9235 11.8453 17.8901 11.8988 17.8232C11.959 17.7497 11.9891 17.6059 11.9891 17.3919V12.4171C11.9891 12.2433 11.9723 12.1196 11.9389 12.046C11.9122 11.9658 11.8486 11.9123 11.7483 11.8856C11.6481 11.8588 11.4809 11.8454 11.2469 11.8454V11.5746H12.8015L14.9278 16.5795H14.9378L17.0842 11.5746H18.5486V11.8454C18.3079 11.8454 18.1374 11.8588 18.0371 11.8856C17.9368 11.9123 17.8699 11.9658 17.8365 12.046C17.803 12.1196 17.7863 12.2433 17.7863 12.4171V17.3619C17.7863 17.529 17.803 17.6527 17.8365 17.733C17.8699 17.8065 17.9368 17.8567 18.0371 17.8834C18.1441 17.9102 18.3146 17.9235 18.5486 17.9235V18.1943H16.2618V17.9235C16.5092 17.9235 16.6864 17.9102 16.7934 17.8834C16.9004 17.85 16.9672 17.7965 16.994 17.7229C17.0274 17.6494 17.0441 17.529 17.0441 17.3619V12.4773H17.0241L14.7573 17.7731H14.657L12.3501 12.4773H12.3301V17.3919C12.3301 17.5591 12.3368 17.6761 12.3501 17.743C12.3702 17.8099 12.4137 17.8567 12.4805 17.8834C12.5541 17.9102 12.6711 17.9235 12.8316 17.9235H13.1525V18.1943H11.2469V17.9235Z" fill="black"/>
