@@ -6,7 +6,7 @@ import {fontFamily} from '../../../globalAccets/fontFamily';
 
 export const InputComponent = (props) => {
     return (
-        <StyledInputComponent>
+        <StyledInputComponent small={props.small}>
             <p>{props.title}</p>
             {props.input}
         </StyledInputComponent>
@@ -18,11 +18,12 @@ const StyledInputComponent = styled.div`
     font-weight: 600;
     width: 100%;
     margin-bottom: 30px;
+    
 
     & p{
         font-size: 11px;
         font-style: normal;
-        margin-bottom: 15px;
+        margin-bottom: ${props => props.small? '5px': '15px'};
     }
 
 

@@ -6,13 +6,21 @@ import { PrimaryButtonComponent } from './elements/PrimaryButtonComponent';
 import {BackButton} from './elements/BackButton';
 import { TextInput} from './elements/TextInput';
 import {DateInput} from './elements/DateInput';
-
+import {useHistory} from 'react-router-dom';
+import {OnBoardingTopText} from './elements/OnBoardingTopText';
 
 
 export const OnBoardingScreen1 = (props) => {
+    const history = useHistory();
+
+    const handleClick = () => {
+        console.log('here')
+        history.push(`/onboarding-provider`);
+    }
+
     return (
         <OnBoardingScaffold
-            segment = 'Patients'
+            topItem = {<OnBoardingTopText prefixText='Welcome to' segment = 'Patients'/>}
             sideImage={sideImage2}> 
                 <InputComponent
                 title='EMAIL'
@@ -23,7 +31,7 @@ export const OnBoardingScreen1 = (props) => {
                 title='DATE OF BIRTH'
                 input={<DateInput/>}
                />
-               <PrimaryButtonComponent buttonText='Continue'/>
+               <PrimaryButtonComponent onClick={handleClick} buttonText='Continue'/>
                <BackButton/>
         </OnBoardingScaffold>
     );

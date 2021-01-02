@@ -12,25 +12,12 @@ export const OnBoardingScaffold = (props) => {
     return (
         <StyledOnBoardingScaffold>
             <StyledLeftContainer>
-
                 <StyledTopDiv>
-                     <Logo /* width={logoDimention.width} height={logoDimention.height} *//>
-            
-                    <StyledOnBoardingTopText>
-                        <h1>Welcome to <span>{props.segment}</span></h1>
-                        <p>See your provider from anywhere, access better<br/> healthcare from the comfort of your home. </p>
-                    </StyledOnBoardingTopText>
+                     <Logo/>
+                    {props.topItem}
                 </StyledTopDiv>
                 
                 <StyledCategoryButtonSection>
-                    {/* <StyledButton> 
-                        <div> <img src={buttonIcon} alt=''/> I’m a health provider </div>
-                        <div>Select <StyledFiChevronRight/></div>
-                    </StyledButton>
-                    <StyledButton> 
-                        <div> <img src={manIcon} alt=''/> I’m a patient </div>
-                        <div>Select <StyledFiChevronRight/></div>
-                    </StyledButton> */}
                     {props.children}
                 </StyledCategoryButtonSection>
         
@@ -47,6 +34,8 @@ export const OnBoardingScaffold = (props) => {
     );
 };
 
+
+
 const StyledOnBoardingScaffold = styled.main`
     display: flex;
     background-color: #fff;
@@ -56,7 +45,7 @@ const StyledOnBoardingScaffold = styled.main`
 const StyledLeftContainer = styled.section`
     width: 100%;
     min-height: 100vh;
-
+    padding-bottom: 30px;
 
 
     @media ${device.laptop}{
@@ -81,44 +70,7 @@ const StyledRightContainer = styled.section`
     }
 `
 
-const StyledOnBoardingTopText = styled.div`
-    & h1{
-        padding: 0;
-        margin: 0;
-        font-size: 48px;
-        font-family: ${fontFamily.heading};
-        font-weight: 500;
 
-      & span{
-        font-weight: 900;
-        color: ${theme.secondaryColor}
-      }
-    }
-
-    & p{
-        font-family: ${fontFamily.body};
-        font-weight: 400;
-        color: ${theme.normalText};
-        font-size: 16px;
-        margin: 0;
-    }
-
-    @media ${device.tablet}{
-    
-        & h1{
-            font-size: 3.3vw;
-        }
-
-       
-    }
-
-    @media ${device.desktop}{
-        & p{
-            font-size: 1vw;
-        }
-    }
-
-`
 
 
 const StyledCategoryButtonSection = styled.section`
@@ -144,7 +96,7 @@ const StyledTopDiv = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 35px;
+    padding-top: 10px;
     width: 85%;
     margin:0 auto;
 
@@ -158,6 +110,7 @@ const StyledTopDiv = styled.section`
 
 const StyledImageDiv = styled.section`
     min-height: 60%;
+    margin-top: 70px;
     & img{
         min-width: 100%;
         max-width: 100%;

@@ -7,14 +7,14 @@ import {fontFamily} from '../../../globalAccets/fontFamily';
 
 export const PrimaryButtonComponent = (props) => {
     return (
-        <StyledButton onClick={props.onClick}>{props.buttonText}</StyledButton>
+        <StyledButton style = {{width: props.width}} inActive={props.inActive} onKeyDown={props.onDoubleClick} onMouseDown={props.onMouseDown} onClick={props.onClick}>{props.buttonText}</StyledButton>
     );
 };
 
 const StyledButton = styled.button`
     border-radius: 10px;
     padding: 13px 14px;
-    background-color: ${theme.primaryColor};
+    background-color: ${props => props.inActive? theme.mutedColor:theme.primaryColor };
     color: ${theme.black};
     font-family: ${fontFamily.manrope};
     font-weight: bold;
@@ -25,7 +25,7 @@ const StyledButton = styled.button`
     width: 100%;
 
     &:hover, &:focus{
-        background-color: ${theme.primaryColor};
+        background-color: ${props => props.inActive? theme.mutedColor:theme.primaryColor };
         color: ${theme.black};
         outline: none;
        

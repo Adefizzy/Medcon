@@ -2,6 +2,16 @@ import React, {useEffect, useState} from 'react';
 
 export const Logo = (props) => {
     const [logoDimention, setLogoDimention] = useState({width: '113', height: '31'});
+
+
+    useEffect(() => {
+        if(window.innerWidth >= 1024){
+            let width = window.innerWidth * (11/100);
+            let height = window.innerHeight * (11/100);
+
+            setLogoDimention({width, height});
+        }
+    }, [])
  
     useEffect(() => {
        window.addEventListener('load', () => {

@@ -7,7 +7,7 @@ import { FiChevronLeft} from 'react-icons/fi';
 
 export const InputDiv = (props) => {
     return (
-        <StyledInputDiv>
+        <StyledInputDiv style={{width: props.width}}>
             {props.children}
         </StyledInputDiv>
     )

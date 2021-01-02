@@ -6,6 +6,7 @@ import { PrimaryButtonComponent } from './elements/PrimaryButtonComponent';
 import {SelectInput} from './elements/SelectInput';
 import {BackButton} from './elements/BackButton';
 import {useHistory} from 'react-router-dom';
+import {OnBoardingTopText} from './elements/OnBoardingTopText';
 
 export const OnBoardingScreen2 = (props) => {
     const history = useHistory();
@@ -14,7 +15,7 @@ export const OnBoardingScreen2 = (props) => {
     }
     return (
         <OnBoardingScaffold
-            segment = 'Provider'
+            topItem={<OnBoardingTopText prefixText='Select' segment = 'Provider'/>}
             sideImage={sideImage3}>
                 <InputComponent
                     title='SELECT PROVIDER'

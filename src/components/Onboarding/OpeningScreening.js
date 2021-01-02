@@ -9,6 +9,7 @@ import manIcon from '../../globalAccets/images/man.png';
 import { theme } from '../../globalAccets/theme';
 import {fontFamily} from '../../globalAccets/fontFamily'
 import {useHistory, useRouteMatch} from 'react-router-dom';
+import {OnBoardingTopText} from './elements/OnBoardingTopText';
 
 export const OpeningScreening = (props) => {
     const {path, url} = useRouteMatch();
@@ -23,7 +24,7 @@ export const OpeningScreening = (props) => {
     }
     return (
         <OnBoardingScaffold
-            segment = 'MedCon'
+            topItem = {<OnBoardingTopText prefixText='Welcome to' segment = 'MedCon'/>}
             sideImage={sideImage1}>       
                 <CategoryButton onClick={onProviderClick} icon={buttonIcon} buttonText='I’m a health provider'/>
                 <CategoryButton onClick={onPatientClick} icon={manIcon} buttonText='I’m a patient'/>
