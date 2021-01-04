@@ -13,8 +13,8 @@ import { Avatar, Input, Modal } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { PrimaryButtonComponent } from './elements/PrimaryButtonComponent';
 import moment from 'moment';
-import {FiX} from 'react-icons/fi'
-
+import {FiX} from 'react-icons/fi';
+import {useHistory} from 'react-router-dom';
 
 const text = `At Humantold, we believe everyone has the right to compassionate mental health care that can help equip, empower, guide, and support you in cultivating the life you want.With so many therapy options available, why choose us? We have conscientiously built Humantold upon the premise that every one of us is deserving of kindness and dignified care. We are dedicated to using our work to help create a better world, and we hope you'll join us in the work of doing so.We strive to create a safe space for your journey of personal growth and empowerment, and we believe that starts with a solid foundation within the organization.Huamantold's leadership team (Christina Jeffrey, Rachel Landman, and myself ) have endeavored (and, I think, succeeded) to create an ethical workplace that nurtures every professional. We take every individual's concerns into account with compassion and care while maintaining clear and firm boundaries. In essence: our goal is to model healthy relationship structures in our work environment so that others may witness them and possibly adopt them within their own families and communities.In a world characterized by increased experiences of dehumanization and depersonalization, we are all struggling to maintain our sanity. At Humantold, we want to be`
 
@@ -22,11 +22,8 @@ export const WaitingRoom = (props) => {
     const [diameter, setDiameter] = useState(44.5);
     const [sessionDuration, setSessionDuration] = useState('3:00');
     const [isBlogModalVisible, setBlogModalVisible] = useState(false);
+    const history = useHistory();
 
-
-    const countdown = () => {
-       
-    }
 
     useEffect(() => {
         let a = moment({ year :2010, month :3, day :5, hour :15, minute :13, second :3, millisecond :123});
@@ -79,6 +76,12 @@ export const WaitingRoom = (props) => {
     const onBlogModalOpen = () => {
         setBlogModalVisible(true);
     }
+
+    const goToChatRoom = (e) => {
+        e.preventDefault();
+
+        history.push('/chat-room');
+    }
     
     return (
         <StyledOnBoardingScaffold>
@@ -98,7 +101,7 @@ export const WaitingRoom = (props) => {
                         <StyledfooterNotification>
                             <h1>Your provider will join you shortly</h1>
                             <p>Your doctor will be joining you in a less than 3mins.</p>
-                            <PrimaryButtonComponent inActive={!(sessionDuration === '0:0')} buttonText={`Join full session ${sessionDuration === '0:0'? 'now' :'in'} (${sessionDuration})`}/>  
+                            <PrimaryButtonComponent onClick={sessionDuration === '0:0' && goToChatRoom} inActive={!(sessionDuration === '0:0')} buttonText={`Join full session ${sessionDuration === '0:0'? 'now' :'in'} (${sessionDuration})`}/>  
                         </StyledfooterNotification>
                        
                     </StyledNotificationDiv>
@@ -146,7 +149,7 @@ export const WaitingRoom = (props) => {
                             <StyledFiX/>
                         </StyledCancel>
                     </div>
-                    <PrimaryButtonComponent inActive={!(sessionDuration === '0:0')} buttonText={`Join full session ${sessionDuration === '0:0'? 'now' :'in'} (${sessionDuration})`}/>
+                    <PrimaryButtonComponent onClick={sessionDuration === '0:0' && goToChatRoom} inActive={!(sessionDuration === '0:0')} buttonText={`Join full session ${sessionDuration === '0:0'? 'now' :'in'} (${sessionDuration})`}/>
                     <StyledBlogArticle>
                         <img src={blogHeaderImage} alt=''/>
                         <h1>What Makes Humantold Unique</h1>
