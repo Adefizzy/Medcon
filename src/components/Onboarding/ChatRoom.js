@@ -98,9 +98,8 @@ export const ChatRoom = (props) => {
 
 
     useEffect(() => {
-        setChatBoxWidth((window.innerWidth/2) -  controlsRef.current.getBoundingClientRect().width/2);
-        console.log(chatBoxRef.current.getBoundingClientRect().width/2);
-        console.log(controlsRef.current.getBoundingClientRect().width/2);
+        setChatBoxWidth((window.innerWidth/2) -  controlsRef?.current?.getBoundingClientRect().width/2);
+
 
         /*  videoRef.current.srcObject = getMedia();
          audioRef.current.srcObject = getMedia(); */
@@ -159,7 +158,7 @@ export const ChatRoom = (props) => {
     return (
         <StyledChatRoom>
             <Logo/>
-            {toolBarType === 'large'? <LargeToolBar/>: toolBarType === 'medium'? <MediumToolBar/>: <MiniToolBar/>}
+            {toolBarType === 'large'? <LargeToolBar isActive={callStatus === 'visible' || callStatus === 'muted'}/>: toolBarType === 'medium'? <MediumToolBar isActive={callStatus === 'visible' || callStatus === 'muted'}/>: <MiniToolBar isActive={callStatus === 'visible' || callStatus === 'muted'}/>}
             <StyledChatBox ref={chatBoxRef} >
                 {callStatus === 'muted'?
                      <StyledVideoBg src={videoBgImage} alt=''/>
@@ -201,16 +200,16 @@ export const ChatRoom = (props) => {
     );
 };
 
-const MediumToolBar = () => {
+const MediumToolBar = (props) => {
     return (
         <StyledToolBar>
         <div style={{width: '100%', marginLeft: '0px'}}>
         <h1>Dr Spring Session</h1>
         </div>
         <div style={{marginLeft: '0px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px'}}>
-        <StyledWifi>
+        <StyledWifi isActive = {props.isActive}>
             <FaWifi/>
-            <p>Live</p>
+            <p>{props.isActive? 'Live': 'Ended'}</p>
         </StyledWifi>
         <StyledMemberCounts>
             <StyledMdGroup/>
@@ -228,14 +227,14 @@ const MediumToolBar = () => {
     )
 }
 
-const LargeToolBar = () => {
+const LargeToolBar = (props) => {
 
     return (
         <StyledToolBar>
         <h1>Dr Spring Session</h1>
-        <StyledWifi>
+        <StyledWifi isActive = {props.isActive}>
             <FaWifi/>
-            <p>Live</p>
+            <p>{props.isActive? 'Live': 'Ended'}</p>
         </StyledWifi>
         <StyledMemberCounts>
             <StyledMdGroup/>
@@ -253,16 +252,16 @@ const LargeToolBar = () => {
 
 }
 
-const MiniToolBar = () => {
+const MiniToolBar = (props) => {
     return (
     <StyledToolBar>
         <div style={{display: 'flex', alignItems: 'center', marginLeft: '0px'}}>
         <h1>Dr Spring Session</h1>
         </div>
         <div style={{marginTop: '20px', width:'100%',display: 'flex', alignItems: 'center' , marginLeft: '0px', justifyContent: 'space-between'}}>
-        <StyledWifi>
+        <StyledWifi isActive = {props.isActive}>
             <FaWifi/>
-            <p>Live</p>
+            <p>{props.isActive? 'Live': 'Ended'}</p>
         </StyledWifi>   
         <StyledMemberCounts>
             <StyledMdGroup/>
@@ -343,7 +342,7 @@ const StyledToolBar = styled.div`
 
 const StyledWifi = styled.div`
     display: flex;
-    color: #EB5757;
+    color: ${props => props.isActive? '#EB5757': theme.mutedColor} ;
     align-items: center;
     justify-content: center;
     height: fit-content;
