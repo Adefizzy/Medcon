@@ -94,7 +94,7 @@ export const WaitingRoom = (props) => {
     
     return (
         <Row>
-            <Col lg={{span: 15}}>
+            <Col lg={{span: 15}} sm={{span: 24}}>
             <StyledLeftContainer>
                 <StyledTopDiv>
                      <WhiteLogo/>
@@ -134,9 +134,8 @@ export const WaitingRoom = (props) => {
         
             </StyledLeftContainer>
             </Col>
-            <Col lg={{span: 9}}>
+            <Col lg={{span: 9}} sm={{span: 24}}>
             <StyledRightContainer>
-
                 <StyledBlogContainer>
                     <h1>From Our Blog</h1>
                     
@@ -238,12 +237,13 @@ const StyledLeftContainer = styled.section`
     padding-bottom: 30px;
     background-color: ${theme.secondaryColor_darker};
     color: #fff;
+    padding-bottom: 100px;
     /* border: 1px solid red; */
 
 
-    /* @media ${device.laptop}{
-        min-width: 62.5%;
-    } */
+    @media ${device.laptop}{
+       padding-bottom: 0px;
+    }
 `
 
 
@@ -254,12 +254,16 @@ const StyledRightContainer = styled.section`
     background-size: cover;
     /* min-height: 100vh; */
     padding: 10px;
+    padding-bottom: 20px;
     width: 100%;
-   /*  border: 1px solid red; */
+
 
 
    @media ${device.tablet}{
-        padding: 30px;
+       /*  padding: 30px; */
+       padding-top: 70px;
+       padding-left: 30px;
+       padding-right: 20px;
         width: 100%
     }
 
@@ -294,7 +298,7 @@ const StyledCategoryButtonSection = styled.section`
 `
 
 const StyledTopDiv = styled.section`
-    min-height: 30%;
+   /*  min-height: 30%; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -312,7 +316,7 @@ const StyledTopDiv = styled.section`
 
 const StyledVideoDiv = styled.section`
     height: 40vh;
-    margin-top: 70px;
+    margin-top: 30px;
     width: 100%auto;
     background-color: #122309;
     border-radius: 8px;
@@ -325,7 +329,8 @@ const StyledHeaderText = styled.h1`
     font-weight: 500;
     font-size: 36px;
     color: #fff;
-    margin-top: 60px;
+    margin-top: 50px;
+   
 
     @media ${device.laptop}{
         font-size: 2.4vw;
@@ -430,7 +435,6 @@ const StyledBlogContainer = styled.div`
     box-shadow: 0px 10.886px 21.772px rgba(138, 149, 158, 0.2);
     border-radius: 5.44299px;
     padding: 23px;
-    margin-bottom: 30px;
 
     & > h1{
         margin-bottom: 40px;
@@ -454,6 +458,7 @@ const StyledBlogSummary = styled.div`
     margin-bottom: 30px;
     cursor: pointer;
     justify-content: space-between;
+    align-items: flex-start;
 
     & img{
         width: 100%;
