@@ -25,6 +25,7 @@ export const ChatRoom = (props) => {
     const [controlsWidth, setControlsWidth] = useState(100);
     const [toolBarType, setToolBarType] = useState('large');
     const [callStatus, setCallStatus] = useState('visible');
+    const [videoHeight, setVideoHeight] = useState(0);
 
     function stop(e) {
         var stream = videoRef.current.srcObject;
@@ -65,10 +66,9 @@ export const ChatRoom = (props) => {
         if (navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({audio: {
                 echoCancellation: true,
-                noiseSuppression: true}, video:  {
-                    echoCancellation: true,
-                    noiseSuppression: true, width:{ideal: chatBoxRef.current.getBoundingClientRect().width}, height: {ideal: chatBoxRef.current.getBoundingClientRect().height}}})
-              .then(function (stream) {
+                noiseSuppression: true}, video:{width:{ min: 1024, ideal: 1280, max: 1920 },
+                height: { min: 576, ideal: 720, max: 1080 }}})
+              .then((stream) => {
                 videoRef.current.srcObject = stream;
                 audioRef.current.srcObject = stream;
                 audioRef.current.volume = 0.01;
@@ -96,21 +96,48 @@ export const ChatRoom = (props) => {
         
     }
 
+    useEffect(() => {
+        setVideoHeight(window.innerHeight * 80/100);
+        if(window.innerWidth > 768){
+            setToolBarType('large')
+        }else if( window.innerWidth < 768){
+            setToolBarType('small')
+        }else{
+            setToolBarType('medium')
+        }
+
+        window.addEventListener('load', () => {
+            if(window.innerWidth > 768){
+                setToolBarType('large')
+            }else if( window.innerWidth < 768){
+                setToolBarType('small')
+            }else{
+                setToolBarType('medium')
+            }
+        })
+
+        return () => window.removeEventListener('load', () => {
+            setVideoHeight(window.innerHeight * 80/100);
+             if(window.innerWidth > 768){
+                 setToolBarType('large')
+             }else if( window.innerWidth < 768){
+                 setToolBarType('small')
+             }else{
+                 setToolBarType('medium')
+             }
+        })
+    }, [])
 
     useEffect(() => {
+
+        console.log(videoRef.current);
         setChatBoxWidth((window.innerWidth/2) -  controlsRef?.current?.getBoundingClientRect().width/2);
 
-
-        /*  videoRef.current.srcObject = getMedia();
-         audioRef.current.srcObject = getMedia(); */
-         
-         console.log(navigator.mediaDevices.getUserMedia);
          if (navigator.mediaDevices.getUserMedia) {
              navigator.mediaDevices.getUserMedia({audio:  {
                  echoCancellation: true,
-                 noiseSuppression: true},  video: {
-                     echoCancellation: true,
-                     noiseSuppression: true, width:{ideal: chatBoxRef.current.getBoundingClientRect().width}, height: {ideal: chatBoxRef.current.getBoundingClientRect().height}}})
+                 noiseSuppression: true}, video:{width: { min: 1024, ideal: 1280, max: 1920 },
+                 height: { min: 576, ideal: 720, max: 1080 }}})
                .then(function (stream) {
                 
      
@@ -121,36 +148,15 @@ export const ChatRoom = (props) => {
                  videoRef.current.muted = 0;
                  audioRef.current.play()
                  videoRef.current.play()
- 
-                
- 
- 
                })
-               .catch(function (err0r) {
+               .catch(function (err) {
                  console.log("Something went wrong!");
+                 console.log(err)
                });
            }
 
 
-           window.addEventListener('load', () => {
-               if(window.innerWidth > 768){
-                   setToolBarType('large')
-               }else if( window.innerWidth < 768){
-                   setToolBarType('small')
-               }else{
-                   setToolBarType('medium')
-               }
-           })
-
-           return () => window.removeEventListener('load', () => {
-                if(window.innerWidth > 768){
-                    setToolBarType('large')
-                }else if( window.innerWidth < 768){
-                    setToolBarType('small')
-                }else{
-                    setToolBarType('medium')
-                }
-           })
+          
      }, [])
 
 
@@ -165,7 +171,8 @@ export const ChatRoom = (props) => {
                 : callStatus === 'close'?
                     <CallEnded/>
                 :
-                    <StyledVideo ref={videoRef}></StyledVideo>}
+                    <StyledVideo height={videoHeight} ref={videoRef}></StyledVideo>}
+                   {/*  <StyledVideo width={375} height={800} ref={videoRef}></StyledVideo> */}
                 <audio  style={{display: 'none'}} controls ref={audioRef}></audio>
                {(callStatus === 'visible' || callStatus === 'muted' ) && <>  
                 <StyledMainControls ref={controlsRef} >

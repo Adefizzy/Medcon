@@ -4,17 +4,21 @@ import waitingImage from '../../globalAccets/images/waitingImage.png';
 import blogImage1 from '../../globalAccets/images/blogImage1.png';
 import blogImage2 from '../../globalAccets/images/blogImage2.png';
 import blogImage3 from '../../globalAccets/images/blogImage3.png';
+import waitingAvatar from '../../globalAccets/images/waitingAvatar.png';
 import blogHeaderImage from '../../globalAccets/images/blogHeaderImage.png';
 import {device} from '../../globalAccets/breakbpoints';
 import { WhiteLogo } from '../../globalAccets/svgs/WhiteLogo';
+import { WaitingRoomAvatar } from '../../globalAccets/svgs/WaitingRoomAvatar';
 import {fontFamily} from '../../globalAccets/fontFamily'
 import { theme } from '../../globalAccets/theme';
-import { Avatar, Input, Modal } from 'antd';
+import { Avatar, Input, Modal, Row, Col } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { PrimaryButtonComponent } from './elements/PrimaryButtonComponent';
 import moment from 'moment';
 import {FiX} from 'react-icons/fi';
 import {useHistory} from 'react-router-dom';
+import { MiddleIcon } from '../../globalAccets/svgs/MiddleIcon';
+import { WaitingRoomIcon2 } from '../../globalAccets/svgs/WaitingRoomIcon2';
 
 const text = `At Humantold, we believe everyone has the right to compassionate mental health care that can help equip, empower, guide, and support you in cultivating the life you want.With so many therapy options available, why choose us? We have conscientiously built Humantold upon the premise that every one of us is deserving of kindness and dignified care. We are dedicated to using our work to help create a better world, and we hope you'll join us in the work of doing so.We strive to create a safe space for your journey of personal growth and empowerment, and we believe that starts with a solid foundation within the organization.Huamantold's leadership team (Christina Jeffrey, Rachel Landman, and myself ) have endeavored (and, I think, succeeded) to create an ethical workplace that nurtures every professional. We take every individual's concerns into account with compassion and care while maintaining clear and firm boundaries. In essence: our goal is to model healthy relationship structures in our work environment so that others may witness them and possibly adopt them within their own families and communities.In a world characterized by increased experiences of dehumanization and depersonalization, we are all struggling to maintain our sanity. At Humantold, we want to be`
 
@@ -22,6 +26,8 @@ export const WaitingRoom = (props) => {
     const [diameter, setDiameter] = useState(44.5);
     const [sessionDuration, setSessionDuration] = useState('3:00');
     const [isBlogModalVisible, setBlogModalVisible] = useState(false);
+    const [buttonWidth, setButtonWidth] = useState('100%');
+    const [videoButtonWidth, setVideoButtonWith] = useState('50%')
     const history = useHistory();
 
 
@@ -38,7 +44,7 @@ export const WaitingRoom = (props) => {
 
             setSessionDuration(`${diffTime.minutes()}:${diffTime.seconds()}`);
 
-            if(diffTime.minutes() == 0 && diffTime.seconds() == 0){
+            if(diffTime.minutes() === 0 && diffTime.seconds() === 0){
                 clearInterval(intervalToken);
             }
             
@@ -51,18 +57,21 @@ export const WaitingRoom = (props) => {
         window.addEventListener('load', () => {
             if(window.innerWidth >= 1024){
            
-                let width = window.innerWidth * (4/100);
+                let width = window.innerWidth * (6.3/100);
         
-    
+                setButtonWidth('70%');
+                setVideoButtonWith('35%')
                 setDiameter(width);
             }
         });
  
         return () => window.removeEventListener('load', () => {
             if(window.innerWidth >= 1024){
-                let width = window.innerWidth * (4/100);
+
+                let width = window.innerWidth * (6.3/100);
         
-    
+                setButtonWidth('70%');
+                setVideoButtonWith('35%')
                 setDiameter(width);
             }
         });
@@ -84,7 +93,8 @@ export const WaitingRoom = (props) => {
     }
     
     return (
-        <StyledOnBoardingScaffold>
+        <Row>
+            <Col lg={{span: 15}}>
             <StyledLeftContainer>
                 <StyledTopDiv>
                      <WhiteLogo/>
@@ -94,21 +104,39 @@ export const WaitingRoom = (props) => {
                 <StyledCategoryButtonSection>
                     <StyledNotificationDiv>
                         <StyledHeaderNotification>
-                         <Avatar size={diameter} icon={<UserOutlined />}/>
+                         <StyledImage>
+                            <WaitingRoomAvatar/>
+                         </StyledImage>
                          <StyledInput value='Adeyemi Marcus'/>
-                         <StyledImage src={waitingImage} alt=''/>
+                        
+                         <StyledDemacator>
+                            <MiddleIcon/>
+                         </StyledDemacator>
                         </StyledHeaderNotification>
                         <StyledfooterNotification>
                             <h1>Your provider will join you shortly</h1>
                             <p>Your doctor will be joining you in a less than 3mins.</p>
-                            <PrimaryButtonComponent onClick={sessionDuration === '0:0' && goToChatRoom} inActive={!(sessionDuration === '0:0')} buttonText={`Join full session ${sessionDuration === '0:0'? 'now' :'in'} (${sessionDuration})`}/>  
+                            <PrimaryButtonComponent width={buttonWidth} onClick={sessionDuration === '0:0' && goToChatRoom} isActive={!(sessionDuration === '0:0')} buttonText={`Join full session ${sessionDuration === '0:0'? 'now' :'in'} ${sessionDuration === '0:0' ? '': `(${sessionDuration})`}`}/>  
                         </StyledfooterNotification>
-                       
                     </StyledNotificationDiv>
+
+                    <StyledFooter>
+                        <div>
+                            <WaitingRoomIcon2/>
+                            <h1>Welcome to MedCon Virtual Guide</h1>
+                        </div>
+                        <p>
+                        Welcome to care that meets your needs. See how we’re building a better experience for people just like you. Medcon offers a unique virtual care experience from the comfort of your home, at work, or on-the-go, by video chat or phone. We bring Primary and Urgent Care clinicians to you, by phone or video chat, in as little as 10 minutes.
+                        </p>
+
+                    </StyledFooter>
                 </StyledCategoryButtonSection>
         
             </StyledLeftContainer>
+            </Col>
+            <Col lg={{span: 9}}>
             <StyledRightContainer>
+
                 <StyledBlogContainer>
                     <h1>From Our Blog</h1>
                     
@@ -128,11 +156,17 @@ export const WaitingRoom = (props) => {
                         onClick={onBlogModalOpen}
                     />
                 </StyledBlogContainer>
-                {/* <StyledImageDiv>
-                     <img src={props.sideImage} alt=''/> 
-                    
-                </StyledImageDiv>  */}
+                <StyledVideoDiv>
+                    <StyledVideo  controls={true}>
+                        <source src="https://www.youtube.com/embed/QCO0tXeFFEo" type="video/mp4"/>
+                        <source src="mov_bbb.ogg" type="video/ogg"/>   
+                    </StyledVideo>
+                    <StyledVideoButtonDiv>
+                        <PrimaryButtonComponent onClick={onBlogModalOpen} width={videoButtonWidth}  isActive={false} buttonText='Play Video'/>
+                    </StyledVideoButtonDiv>
+                </StyledVideoDiv> 
             </StyledRightContainer>
+            </Col>
             <StyledModal 
                 visible={isBlogModalVisible} 
                 onCancel={handleBlogModalCancel}
@@ -149,7 +183,7 @@ export const WaitingRoom = (props) => {
                             <StyledFiX/>
                         </StyledCancel>
                     </div>
-                    <PrimaryButtonComponent onClick={sessionDuration === '0:0' && goToChatRoom} inActive={!(sessionDuration === '0:0')} buttonText={`Join full session ${sessionDuration === '0:0'? 'now' :'in'} (${sessionDuration})`}/>
+                    <PrimaryButtonComponent onClick={sessionDuration === '0:0' && goToChatRoom} isActive={!(sessionDuration === '0:0')} buttonText={`Join full session ${sessionDuration === '0:0'? 'now' :'in'} (${sessionDuration})`}/>
                     <StyledBlogArticle>
                         <img src={blogHeaderImage} alt=''/>
                         <h1>What Makes Humantold Unique</h1>
@@ -159,7 +193,7 @@ export const WaitingRoom = (props) => {
                 </StyledFullBlog>
                 
             </StyledModal>
-        </StyledOnBoardingScaffold>
+        </Row>
     );
 };
 
@@ -167,7 +201,9 @@ export const WaitingRoom = (props) => {
 const Blog = (props) => {
     return (
         <StyledBlogSummary onClick={props.onClick}>
-            <img src={props.image} alt=''/>
+            <div>
+                <img src={props.image} alt=''/>
+            </div>
             <div>
                 <h1>{props.title}</h1>
                 <p>Read time: 5mins</p>
@@ -179,10 +215,11 @@ const Blog = (props) => {
 
 
 const StyledOnBoardingScaffold = styled.main`
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
     background-color: #fff;
     width: 100vw;
-    
+    height: 100%;
     flex-direction: row;
     flex-wrap: wrap;
     
@@ -197,16 +234,16 @@ const StyledOnBoardingScaffold = styled.main`
 
 const StyledLeftContainer = styled.section`
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     padding-bottom: 30px;
-    background-color: ${theme.secondaryColor};
+    background-color: ${theme.secondaryColor_darker};
     color: #fff;
     /* border: 1px solid red; */
 
 
-    @media ${device.laptop}{
+    /* @media ${device.laptop}{
         min-width: 62.5%;
-    }
+    } */
 `
 
 
@@ -215,17 +252,22 @@ const StyledRightContainer = styled.section`
     /* display: none; */
     background-color: #fff;
     background-size: cover;
-    min-height: 100vh;
-    padding: 30px;
+    /* min-height: 100vh; */
+    padding: 10px;
     width: 100%;
    /*  border: 1px solid red; */
 
 
-    
+   @media ${device.tablet}{
+        padding: 30px;
+        width: 100%
+    }
 
     @media ${device.laptop}{
         display: block;
-        min-width: 37.5%;
+       /*  min-width: 37.5%; */
+       width: 100%
+
     }
 `
 
@@ -233,10 +275,11 @@ const StyledRightContainer = styled.section`
 
 
 const StyledCategoryButtonSection = styled.section`
-    max-height: 70%;
-    padding-top: 60px;
+    min-height: 70%;
+    padding-top: 10px;
     width: 90%;
     margin:0 auto;
+  /*   border: 1px solid purple; */
 
     @media ${device.laptop}{
         width: 85%;
@@ -246,7 +289,7 @@ const StyledCategoryButtonSection = styled.section`
     }
 
     @media ${device.desktopL}{
-        padding-top: 100px;
+        padding-top: 20px;
     }  
 `
 
@@ -267,17 +310,14 @@ const StyledTopDiv = styled.section`
 
 `
 
-const StyledImageDiv = styled.section`
-    min-height: 60%;
+const StyledVideoDiv = styled.section`
+    height: 40vh;
     margin-top: 70px;
-    & img{
-        min-width: 100%;
-        max-width: 100%;
-        height: auto;
-        object-fit: contain;
-        
-    }
-
+    width: 100%auto;
+    background-color: #122309;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
 `
 
 const StyledHeaderText = styled.h1`
@@ -285,6 +325,7 @@ const StyledHeaderText = styled.h1`
     font-weight: 500;
     font-size: 36px;
     color: #fff;
+    margin-top: 60px;
 
     @media ${device.laptop}{
         font-size: 2.4vw;
@@ -294,7 +335,11 @@ const StyledHeaderText = styled.h1`
 const StyledNotificationDiv = styled.section`
     width: 100%;
     @media ${device.laptop}{
-        width: 80%;
+        width: 88%;
+    }
+
+    @media ${device.laptopL}{
+        width: 76%;
     }
 `
 
@@ -305,8 +350,13 @@ const StyledHeaderNotification = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 8px 8px 0px 0px;
-    padding: 40px 0px 40px 0px;
+    padding: 35px 0px 35px 0px;
     position: relative;
+
+
+    @media ${device.tablet}{
+        justify-content: flex-start;
+    }
 `
 
 const StyledfooterNotification = styled.div`
@@ -324,25 +374,31 @@ const StyledfooterNotification = styled.div`
     & h1{
         font-size: 26.32px;
         font-weight: 600;
+        margin: 0px;
     }
 
     & p{
         font-size: 16px;
         color: ${theme.mutedColor};
+        margin-bottom: 40px;
+    }
+
+    @media ${device.tablet}{
+        padding-top: 4vw;
     }
 
     @media ${device.laptop}{
-        padding-top: 2vw;
+        padding-top: 3vw;
     }
 `
 
-const StyledImage = styled.img`
+const StyledDemacator = styled.div`
      position: absolute;
-     top: 80%;
-     right:43%;
-     @media ${device.laptop}{
-         width: 3vw;
-     }
+     bottom: -14%;
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 `
 
 const StyledInput = styled(Input)`
@@ -397,20 +453,33 @@ const StyledBlogSummary = styled.div`
     display: flex;
     margin-bottom: 30px;
     cursor: pointer;
+    justify-content: space-between;
 
     & img{
-        flex-basis: 30%;
+        width: 100%;
         height: auto;
         border-radius: 5.44299px;
-        object-fit: contain;
+       
+    }
+
+    & > div:first-child{
+        flex-basis: 20%;
         margin-right: 20px;
     }
 
-    & > div{
+    & > div:nth-child(2){
+        flex-basis: 75%;
         & p{
             font-size: 14px;
             color: ${theme.mutedColor};
             font-family: ${fontFamily.body};
+        }
+
+
+        & h1{
+            font-size: 16px;
+            font-family: ${fontFamily.body};
+            font-weight: 500;
         }
     }
 
@@ -419,6 +488,11 @@ const StyledBlogSummary = styled.div`
             & p{
                 font-size: 0.9vw;
             }
+
+            & h1{
+            font-size: 1.1vw;
+            
+        }
        }
     }
 `
@@ -499,4 +573,67 @@ const StyledBlogArticle = styled.div`
             font-size: 1vw;
         }
     }
+`
+
+const StyledImage = styled.div`
+    margin-left: 0px;
+    @media ${device.tablet}{
+        margin-left: 30px;
+    }
+`
+const StyledFooter = styled.footer`
+     width: 100%;
+     font-family: ${fontFamily.body};
+
+     margin-top: 50px;
+     & > div:first-child{
+         display: flex;
+         
+
+         & h1{
+            color: ${theme.primaryColor};
+            margin-left: 20px;
+          
+            font-weight: 600;
+            font-size: 18px;
+         }
+     }
+
+
+     & p{
+         font-weight: 400;
+         font-size: 13px;
+         color: #AFC4CD;
+         margin-top: 10px;
+     }
+
+    @media ${device.laptop}{
+        width: 88%;
+        & p{
+         
+         font-size: 0.9vw;
+      
+        }
+    }
+
+    @media ${device.laptopL}{
+        width: 76%;
+    }
+`
+
+const StyledVideoButtonDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    bottom: 40% ;
+`
+
+const StyledVideoButton = styled(PrimaryButtonComponent)`
+    width: 35% !important;
+
+`
+const StyledVideo = styled.video`
+    height: 100%;
+    width: 100%
 `
