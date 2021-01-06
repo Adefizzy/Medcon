@@ -105,27 +105,6 @@ export const ChatRoom = (props) => {
         }else{
             setToolBarType('medium')
         }
-
-        window.addEventListener('load', () => {
-            if(window.innerWidth > 768){
-                setToolBarType('large')
-            }else if( window.innerWidth < 768){
-                setToolBarType('small')
-            }else{
-                setToolBarType('medium')
-            }
-        })
-
-        return () => window.removeEventListener('load', () => {
-            setVideoHeight(window.innerHeight * 80/100);
-             if(window.innerWidth > 768){
-                 setToolBarType('large')
-             }else if( window.innerWidth < 768){
-                 setToolBarType('small')
-             }else{
-                 setToolBarType('medium')
-             }
-        })
     }, [])
 
     useEffect(() => {

@@ -23,7 +23,7 @@ import { WaitingRoomIcon2 } from '../../globalAccets/svgs/WaitingRoomIcon2';
 const text = `At Humantold, we believe everyone has the right to compassionate mental health care that can help equip, empower, guide, and support you in cultivating the life you want.With so many therapy options available, why choose us? We have conscientiously built Humantold upon the premise that every one of us is deserving of kindness and dignified care. We are dedicated to using our work to help create a better world, and we hope you'll join us in the work of doing so.We strive to create a safe space for your journey of personal growth and empowerment, and we believe that starts with a solid foundation within the organization.Huamantold's leadership team (Christina Jeffrey, Rachel Landman, and myself ) have endeavored (and, I think, succeeded) to create an ethical workplace that nurtures every professional. We take every individual's concerns into account with compassion and care while maintaining clear and firm boundaries. In essence: our goal is to model healthy relationship structures in our work environment so that others may witness them and possibly adopt them within their own families and communities.In a world characterized by increased experiences of dehumanization and depersonalization, we are all struggling to maintain our sanity. At Humantold, we want to be`
 
 export const WaitingRoom = (props) => {
-    const [diameter, setDiameter] = useState(44.5);
+   
     const [sessionDuration, setSessionDuration] = useState('3:00');
     const [isBlogModalVisible, setBlogModalVisible] = useState(false);
     const [buttonWidth, setButtonWidth] = useState('100%');
@@ -53,28 +53,14 @@ export const WaitingRoom = (props) => {
     }, [])
 
     useEffect(() => {
-    
-        window.addEventListener('load', () => {
-            if(window.innerWidth >= 1024){
+        if(window.innerWidth >= 1024){
            
-                let width = window.innerWidth * (6.3/100);
+            let width = window.innerWidth * (6.3/100);
+    
+            setButtonWidth('70%');
+            setVideoButtonWith('35%')
         
-                setButtonWidth('70%');
-                setVideoButtonWith('35%')
-                setDiameter(width);
-            }
-        });
- 
-        return () => window.removeEventListener('load', () => {
-            if(window.innerWidth >= 1024){
-
-                let width = window.innerWidth * (6.3/100);
-        
-                setButtonWidth('70%');
-                setVideoButtonWith('35%')
-                setDiameter(width);
-            }
-        });
+        }
     }, []) 
 
 
