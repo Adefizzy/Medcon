@@ -16,7 +16,7 @@ export const OpeningScreening = (props) => {
     const history = useHistory();
 
     const onProviderClick = () => {
-        history.push(`/onboarding-provider`);
+        history.push(`/provider-module/Overview`);
     }
 
     const onPatientClick = () => {

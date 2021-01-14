@@ -5,10 +5,11 @@ import {OnBoardingScreen3} from './components/Onboarding/OnBoardingScreen3';
 import { OnBoardingSuccess } from './components/Onboarding/OnBoardingSuccess';
 import { OnBoardingFailed } from './components/Onboarding/OnBoardingFailed';
 import { ChatRoom } from './components/Onboarding/ChatRoom';
-import {UpcomingEventScaffold} from './components/Overview/UpcomingEventScaffold';
+import {ProviderModule} from './components/ProviderModuleComponents/ProviderModule';
 import {Switch, Route} from 'react-router-dom';
 import { WaitingRoom } from './components/Onboarding/WaitingRoom';
 import {BrowserRouter as Router } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -23,8 +24,8 @@ function App() {
        <Route path='/onboarding-provider-2'>
           <OnBoardingScreen3/>
        </Route>
-       <Route path='/upcoming-event-past-session'>
-          <UpcomingEventScaffold/>
+       <Route path='/provider-module'>
+          <ProviderModule/>
        </Route>
        <Route path='/onboarding-success'>
          <OnBoardingSuccess/>
