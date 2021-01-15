@@ -14,7 +14,8 @@ import {TiArrowRight} from 'react-icons/ti';
 import { MdPeopleOutline } from 'react-icons/md'
 import { Overview } from './Overview'
 import { OverviewEmpty } from './OverviewEmpty'
-
+import { Schedule } from './Schedule';
+import { ScheduleEmpty } from './ScheduleEmpty';
 import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaitingIcon';
 /* 
 const navItems = [
@@ -30,6 +31,7 @@ const navItems = [
 
 export const ProviderModule = (props) => {
     const [visibleSideBar, setVisibleSideBar] = useState(false);
+    const [currentPageName, setCurrentPageName] = useState('Overview');
     const {path, url} = useRouteMatch();
     const history = useHistory();
     const [navItems, setNavItems]  = useState([
@@ -59,8 +61,8 @@ export const ProviderModule = (props) => {
             return item;
         })
 
-        history.push(`${url}/${name}`)
-
+        history.push(`${url}/${name.replace(name[0], name[0].toLowerCase())}`)
+        setCurrentPageName(name);
         setNavItems(newNavItems);
     }
 
@@ -85,7 +87,7 @@ export const ProviderModule = (props) => {
                 <FiMenu onClick={handleOpenSideBar}/>
             </StyledHeader>
             <StyledTitleHeaderDiv xs={{span: 24}}>
-                <StyledTitle>Overview</StyledTitle>
+                <StyledTitle>{currentPageName}</StyledTitle>
                 <StyledAlertAndButtondiv>
                     <StyledAlertDiv style={{marginRight: '30px'}}>
                         <StyledFiBell/>
@@ -112,11 +114,17 @@ export const ProviderModule = (props) => {
                 <Route exact path={`${path}`}>
                     <Overview/>
                 </Route>
-                <Route path={`${path}/Overview`}>
+                <Route path={`${path}/overview`}>
                     <Overview/>
                 </Route>
-                <Route exact path={`${path}/Overview-empty`}>
+                <Route path={`${path}/overview-empty`}>
                     <OverviewEmpty/>
+                </Route>
+                <Route path={`${path}/schedule`}>
+                    <Schedule/>
+                </Route>
+                <Route path={`${path}/schedule-empty`}>
+                    <ScheduleEmpty/>
                 </Route>
             </Switch>
            

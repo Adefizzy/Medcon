@@ -17,6 +17,7 @@ import { EmptyWaitingListIcon } from '../../globalAccets/svgs/EmptyWaitingListIc
 import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaitingIcon';
 import laughingHeads  from '../../globalAccets/images/laughingHeads.png';
 import fileIcon  from '../../globalAccets/images/fileIcon.png';
+import { CreateAppointment } from './atoms/CreateAppointment';
 /* 
 const navItems = [
     {name: 'Overview', icon: <HomeIcon/>},
@@ -194,30 +195,7 @@ const EmptyUpcomingEvents = (props) => {
     return (
         <TitledCard  title='Upcoming events' titleFooter='Schedule meetings and calls'>
            <StyledEmptyUpcomingEvents>
-               <StyledTablet>
-                   <StyledSkeleton>
-                       <div></div>
-                       <div></div>
-                   </StyledSkeleton>
-                   <div>
-                    <img src={laughingHeads} alt=''/>
-                   </div>
-               </StyledTablet>
-               <StyledTablet>
-                   <StyledSkeleton>
-                       <div></div>
-                       <div></div>
-                   </StyledSkeleton>
-                   <div>
-                    <img src={fileIcon} alt=''/>
-                   </div>
-               </StyledTablet>
-                <h1>Create an Appointment</h1>
-                <p>An appointment easily allows you to find<br/> the perfect time for your patient sessions</p>
-                <StyledMediumButton>
-                    <StyledSmallIoMdPeople/>
-                    <p>Add New Appointment</p>
-                </StyledMediumButton>
+             <CreateAppointment/>
            </StyledEmptyUpcomingEvents>
         </TitledCard>
     )
@@ -801,21 +779,35 @@ const StyledEmptyWaitingList = styled.div`
         font-size: 12px;
         color: #7A8593;
     }
+
+    @media ${device.laptop}{
+        & h1{
+       
+        font-size:1.4vw;
+        }
+
+    & p{
+        font-size: 0.8vw;
+ 
+    }
+    }
 `
 
-const StyledEmptyUpcomingEvents = styled(StyledEmptyWaitingList)`
+const StyledEmptyUpcomingEvents = styled.div`
     width: 100%;
     padding-top:70px;
     margin-bottom: 40px;
+    display: grid;
+    place-items: center;
 `
 
 const StyledTablet = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 70vw;
     box-shadow: 0px 8.49057px 16.9811px rgba(169, 174, 181, 0.21);
     border-radius: 6.1597px;   
-    padding: 20px; 
+    padding: 10px 20px; 
 
     &:nth-child(2){
         margin-top: 10px;
@@ -829,6 +821,18 @@ const StyledTablet = styled.div`
             
             height: auto;
         }
+    }
+
+    @media ${device.tablet}{
+        width: 30vw;
+    }
+
+    @media ${device.laptop}{
+        width: 20vw;
+    }
+
+    @media ${device.laptopL}{
+        width: 17vw;
     }
 `
 
@@ -851,11 +855,12 @@ const StyledSkeleton = styled.div`
     }
 `
 
-const StyledMediumButton = styled(StyledExtraLargeButton)`
-    padding: 10px 0px;
-    border-radius: 6.75px;
-    
-
+const StyledMediumButton = styled(StyledButton)`
+    border-radius: 6px;
+    color: #fff;
+    justify-content: center;
+    background-image: linear-gradient(to right, ${theme.secondaryColor}, ${theme.secondaryColor_lighter});
+    margin-top: 20px;
     & p{
         color: #fff;
         font-size: 10px;
@@ -863,10 +868,38 @@ const StyledMediumButton = styled(StyledExtraLargeButton)`
     }
 
     @media ${device.laptop}{
-        width: 35%;
+        & p{
+  
+        font-size: 0.7vw;
+
+    }
+
     }
 `
 
 const StyledSmallIoMdPeople = styled(StyledIoMdPeople)`
     font-size: 10px;
+
+    @media ${device.laptop}{
+        font-size: 0.9vw;
+    }
+`
+
+const StyledUpcomingEventFooter = styled.div`
+    text-align: center;
+    width: 70vw;
+    display: grid;
+    place-items: center;
+
+    @media ${device.tablet}{
+        width: 30vw;
+    }
+
+    @media ${device.laptop}{
+        width: 25vw;
+    }
+
+    @media ${device.laptopL}{
+        width: 20vw;
+    }
 `

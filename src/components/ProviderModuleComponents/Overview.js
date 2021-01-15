@@ -16,44 +16,17 @@ import { IoMdCalendar, IoIosArrowRoundForward, IoIosPlay, IoMdPeople } from 'rea
 import { UserOutlined } from '@ant-design/icons';
 import {TiArrowRight} from 'react-icons/ti';
 import { MdPeopleOutline } from 'react-icons/md'
+import {TimeIcon} from './atoms/TimeIcon';
 
 import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaitingIcon';
-/* 
-const navItems = [
-    {name: 'Overview', icon: <HomeIcon/>},
-    {name: 'Schedule', icon: <ScheduleIcon/>},
-    {name: 'Analytics', icon: <AnalyticIcon/>},
-    {name: 'Patients', icon: <PatientIcon/>},
-] */
+
 
 
 
 
 
 export const Overview = (props) => {
-    const [visibleSideBar, setVisibleSideBar] = useState(false);
-    const [navItems, setNavItems]  = useState([
-        {name: 'Overview', icon: <GoHome/>, isActive: true},
-        {name: 'Analytics', icon: <FiTrendingUp/>, isActive: false},
-        {name: 'Schedule', icon: <FiBookmark/>, isActive: false},
-        {name: 'Patients', icon: <FiUsers/>, isActive: false},
-    ]);
-
-
-    const handleOpenSideBar = () => {
-        setVisibleSideBar(true);
-    }
-
-    const onCloseSideBar = () => {
-        setVisibleSideBar(false);
-    }
-
-    const sidebarNav = navItems.map((item, index) => 
-            <StyledNav isActive={item.isActive} key={index}>
-                {item.icon}
-                <StyledLink isActive={item.isActive} >{item.name}</StyledLink> 
-            </StyledNav> 
-    )
+  
     return (
         <>
         <StatSummarySegment/>
@@ -73,74 +46,6 @@ export const Overview = (props) => {
 };
 
 
- /* <StyledUpcomingEventScaffold>
-            <StyledSideBar lg={{span:4}}>
-                <div style={{marginLeft: '25px', marginTop: '10px', marginBottom: '20px'}}>
-                    <Logo/>
-                </div>
-                {sidebarNav}
-            </StyledSideBar>
-            <StyledMainContainer lg={{span:20}}>
-                <Row>
-            <StyledHeader xs={{span: 24}}>
-                <Logo/>
-                <FiMenu onClick={handleOpenSideBar}/>
-            </StyledHeader>
-            <StyledTitleHeaderDiv xs={{span: 24}}>
-                <StyledTitle>Overview</StyledTitle>
-                <StyledAlertAndButtondiv>
-                    <StyledAlertDiv style={{marginRight: '30px'}}>
-                        <StyledFiBell/>
-                        <Badge count={23} style={{padding:'0px 11px 0px 11px', backgroundColor: '#FFE6E4', color: '#F16063', fontWeight: '700', borderColor: '#FFE6E4'}}/>
-                    </StyledAlertDiv>
-                </StyledAlertAndButtondiv>
-            </StyledTitleHeaderDiv>
-            <Divider/>
-            <StyledHeader>
-                <StyledAlertDiv>
-                    <StyledFiBell/>
-                    <Badge count={23} style={{padding:'0px 11px 0px 11px', backgroundColor: '#FFE6E4', color: '#F16063', fontWeight: '700', borderColor: '#FFE6E4'}}/>
-                </StyledAlertDiv>
-            </StyledHeader>
-            <StatSummarySegment/>
-            <StyledMainStatBody xs={{span: 24}}>
-                <div>
-                    <QuickAction/>
-                    <WaitingList/>
-                </div>
-                <div>
-                    <UpcomingEvents/>
-                </div>
-                
-            </StyledMainStatBody>
-           
-            
-            <Drawer
-                title={<Logo/>}
-                placement="left"
-                closable={false}
-                onClose={onCloseSideBar}
-                visible={visibleSideBar}
-                closeIcon={<FiX/>}
-                bodyStyle={{padding: '0px', position: 'relative'}}
-             >
-        
-                {sidebarNav}
-                <Divider />
-                <StyledNav isActive={false} >
-                    <FiSettings/>
-                    <StyledLink isActive={false} >Settings</StyledLink> 
-                </StyledNav> 
-                <StyledNav style={{position: 'absolute', top: '90%'}} isActive={false} >
-                    <FiLogOut/>
-                    <StyledLink isActive={false} >Logout</StyledLink> 
-                </StyledNav>
-            </Drawer>
-            </Row>
-            </StyledMainContainer>
-        </StyledUpcomingEventScaffold> */
-/*  background-color: #FFEEF1; */
-
 const TopStatPane = (props) => {
     return (
         <StyledTopStatPane>
@@ -159,7 +64,7 @@ const TopStatPane = (props) => {
 
 const StatSummarySegment = () => {
     return (
-        <StyledStatSummaryDiv sm={{span: 24}}>
+        <StyledStatSummaryDiv xs={{span: 24}}>
             <TopStatPane
                 backgroundColor= '#FFEEF1'
                 icon={<MdPeopleOutline/>}
@@ -192,14 +97,6 @@ const StatSummarySegment = () => {
     )
 }
 
-
-const TimeIcon = (props) => {
-    return(
-        <StyledAppointmentsIcon color='#36C298'>
-            <FiClock/>
-        </StyledAppointmentsIcon>
-    )
-}
 
 const WaitingIcon = (props) => {
     return (
@@ -291,13 +188,13 @@ const WaitingList = (props) => {
 const UpcomingEvents = (props) => {
     return (
         <TitledCard  title='Upcoming events' titleFooter='Schedule meetings and calls'>
-            <SingleSchedule timeIcon={<TimeIcon/>}  button={<StyledArrowButton/>}/>
-            <SingleSchedule timeIcon={<TimeIcon/>} button={<StyledArrowButton/>}/>
-            <SingleSchedule timeIcon={<TimeIcon/>}  button={<StyledArrowButton/>}/>
-            <SingleSchedule timeIcon={<TimeIcon/>}  button={<StyledArrowButton/>}/>
-            <SingleSchedule timeIcon={<TimeIcon/>} button={<StyledArrowButton/>}/>
-            <SingleSchedule timeIcon={<TimeIcon/>} button={<StyledArrowButton/>}/>
-            <SingleSchedule timeIcon={<TimeIcon/>} button={<StyledArrowButton/>}/>
+            <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>}  button={<StyledArrowButton/>}/>
+            <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>} button={<StyledArrowButton/>}/>
+            <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>}  button={<StyledArrowButton/>}/>
+            <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>}  button={<StyledArrowButton/>}/>
+            <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>} button={<StyledArrowButton/>}/>
+            <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>} button={<StyledArrowButton/>}/>
+            <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>} button={<StyledArrowButton/>}/>
         </TitledCard>
     )
 }
