@@ -17,6 +17,7 @@ import { UserOutlined } from '@ant-design/icons';
 import {TiArrowRight} from 'react-icons/ti';
 import { MdPeopleOutline } from 'react-icons/md'
 import {TimeIcon} from './atoms/TimeIcon';
+import {useScreenNameContext} from '../context/screenNameContext';
 
 import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaitingIcon';
 
@@ -26,6 +27,11 @@ import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaiti
 
 
 export const Overview = (props) => {
+    const { setCurrentPageName } = useScreenNameContext()
+
+    useEffect(() => {
+        setCurrentPageName('Overview')
+    }, [])
   
     return (
         <>

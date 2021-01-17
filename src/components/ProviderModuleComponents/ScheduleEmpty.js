@@ -24,9 +24,7 @@ const StyledSceduleBar = styled.div`
   background-color: #fff;
   border-radius: 13.3855px;
   width: 100%;
-  padding: 100px;
-   
-
+  min-height: 70vh;
   margin-bottom: 10px;
   display: grid;
   place-items: center;

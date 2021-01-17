@@ -17,6 +17,9 @@ import { OverviewEmpty } from './OverviewEmpty'
 import { Schedule } from './Schedule';
 import { ScheduleEmpty } from './ScheduleEmpty';
 import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaitingIcon';
+import {ScreenNameContext} from '../context/screenNameContext';
+import { Analytic } from './Analytic'
+import { PatientManagement } from './PatientManagement';
 /* 
 const navItems = [
     {name: 'Overview', icon: <HomeIcon/>},
@@ -36,9 +39,9 @@ export const ProviderModule = (props) => {
     const history = useHistory();
     const [navItems, setNavItems]  = useState([
         {name: 'Overview', icon: <GoHome/>, isActive: true},
-        {name: 'Analytics', icon: <FiTrendingUp/>, isActive: false},
+        {name: 'Analytic', icon: <FiTrendingUp/>, isActive: false},
         {name: 'Schedule', icon: <FiBookmark/>, isActive: false},
-        {name: 'Patients', icon: <FiUsers/>, isActive: false},
+        {name: 'Patient', icon: <FiUsers/>, isActive: false},
     ]);
 
 
@@ -62,7 +65,6 @@ export const ProviderModule = (props) => {
         })
 
         history.push(`${url}/${name.replace(name[0], name[0].toLowerCase())}`)
-        setCurrentPageName(name);
         setNavItems(newNavItems);
     }
 
@@ -73,12 +75,22 @@ export const ProviderModule = (props) => {
             </StyledNav> 
     )
     return (
+        <ScreenNameContext.Provider value={{setCurrentPageName}}>
         <StyledUpcomingEventScaffold>
             <StyledSideBar lg={{span:4}}>
                 <div style={{marginLeft: '25px', marginTop: '10px', marginBottom: '20px'}}>
                     <Logo/>
                 </div>
                 {sidebarNav}
+                <Divider />
+                <StyledNav isActive={false} >
+                    <FiSettings/>
+                    <StyledLink isActive={false} >Settings</StyledLink> 
+                </StyledNav> 
+                <StyledNav style={{position: 'absolute', top: '90%'}} isActive={false} >
+                    <FiLogOut/>
+                    <StyledLink isActive={false} >Logout</StyledLink> 
+                </StyledNav>
             </StyledSideBar>
             <StyledMainContainer lg={{span:20}}>
                 <Row>
@@ -126,6 +138,12 @@ export const ProviderModule = (props) => {
                 <Route path={`${path}/schedule-empty`}>
                     <ScheduleEmpty/>
                 </Route>
+                <Route path={`${path}/analytic`}>
+                    <Analytic/>
+                </Route>
+                <Route path={`${path}/patient`}>
+                    <PatientManagement/>
+                </Route>
             </Switch>
            
             
@@ -153,6 +171,7 @@ export const ProviderModule = (props) => {
             </Row>
             </StyledMainContainer>
         </StyledUpcomingEventScaffold>
+        </ScreenNameContext.Provider>
     );
 };
 /*  background-color: #FFEEF1; */

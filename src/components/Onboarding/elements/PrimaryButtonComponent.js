@@ -16,13 +16,14 @@ const StyledButton = styled.button`
     padding: 13px 14px;
     background-color: ${props => props.isActive? theme.mutedColor:theme.primaryColor };
     color: ${props => props.isActive? '#5D6064' :theme.black};
-    font-family: ${fontFamily.manrope};
-    font-weight: bold;
+    font-family: ${fontFamily.body};
+    font-weight: 500;
     border: none;
     font-size: 16px;
     cursor: pointer;
     box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.08);
     width: 100%;
+    letter-spacing: 0.2px;
 
     &:hover, &:focus{
         background-color: ${props => props.isActive? theme.mutedColor:theme.primaryColor };

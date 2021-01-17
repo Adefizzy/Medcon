@@ -18,6 +18,7 @@ import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaiti
 import laughingHeads  from '../../globalAccets/images/laughingHeads.png';
 import fileIcon  from '../../globalAccets/images/fileIcon.png';
 import { CreateAppointment } from './atoms/CreateAppointment';
+import {useScreenNameContext} from '../context/screenNameContext';
 /* 
 const navItems = [
     {name: 'Overview', icon: <HomeIcon/>},
@@ -38,7 +39,11 @@ export const OverviewEmpty = (props) => {
         {name: 'Schedule', icon: <FiBookmark/>, isActive: false},
         {name: 'Patients', icon: <FiUsers/>, isActive: false},
     ]);
+    const { setCurrentPageName } = useScreenNameContext()
 
+    useEffect(() => {
+        setCurrentPageName('Overview')
+    }, [])
 
     const handleOpenSideBar = () => {
         setVisibleSideBar(true);

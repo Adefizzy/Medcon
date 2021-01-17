@@ -30,6 +30,9 @@ import { TimeIcon } from './atoms/TimeIcon';
 import avatar2 from '../../globalAccets/images/avatar2.png';
 import { IconBorder } from './atoms/IconBorder';
 import { ScheduleBarComponentScaffold } from './atoms/ScheduleBarComponentScaffold';
+import {useScreenNameContext} from '../context/screenNameContext';
+import { CreateAppointmentForm } from './CreateAppointmentForm';
+import { CreateAppointmentFormEmpty } from './CreateAppointmentFormEmpty';
 
 const data = [
   { date: { day: 'Monday', otherDate: 'January 3, 2021' }, schedule: [1, 2] },
@@ -41,29 +44,54 @@ const data = [
 ];
 
 export const Schedule = (props) => {
-  const scheduleList = data.map((item, index) => {
-    if (index === 0) {
-      return (
-        <ScheduleBarComponent
-          key={index}
-          day={item.date.day}
-          otherDate={item.date.otherDate}
-          data={item.schedule}
-          displaySwitchButton={true}
-        />
-      );
-    }
-    return (
-      <ScheduleBarComponent
-        key={index}
-        day={item.date.day}
-        otherDate={item.date.otherDate}
-        data={item.schedule}
-      />
-    );
-  });
+    const {url, path} = useRouteMatch();
+    const history = useHistory();
+    const { setCurrentPageName } = useScreenNameContext()
 
-  return <Col xs={{ span: 24 }} style={{marginTop: '30px'}}>{scheduleList}</Col>;
+    useEffect(() => {
+        setCurrentPageName('Schedule')
+    }, [])
+
+    const handleCreateAppointment = () => {
+        history.push(`${url}/create-appointment`)
+    }
+
+    const scheduleList = data.map((item, index) => {
+        if (index === 0) {
+        return (
+            <ScheduleBarComponent
+            key={index}
+            day={item.date.day}
+            otherDate={item.date.otherDate}
+            data={item.schedule}
+            displaySwitchButton={true}
+            onClick = {handleCreateAppointment}
+            />
+        );
+        }
+        return (
+                <ScheduleBarComponent
+                    key={index}
+                    day={item.date.day}
+                    otherDate={item.date.otherDate}
+                    data={item.schedule}
+                /> 
+        );
+    });
+
+  return (
+    <Switch>
+    <Route  exact path={`${path}`}>
+    <Col xs={{ span: 24 }} style={{marginTop: '30px'}}>{scheduleList}</Col>
+    </Route>
+    <Route path={`${path}/create-appointment`}>
+        <CreateAppointmentForm/>
+    </Route>
+    <Route path={`${path}/create-appointment-empty`}>
+        <CreateAppointmentFormEmpty/>
+    </Route>
+    </Switch> 
+  );
 };
 
 
@@ -72,7 +100,7 @@ const ScheduleBarComponent = (props) => {
     return <ScheduleBar key={index} />;
   });
   return (
-    <ScheduleBarComponentScaffold day = {props.day} otherDate={props.otherDate} displaySwitchButton={props.displaySwitchButton} >
+    <ScheduleBarComponentScaffold onClick={props.onClick} day = {props.day} otherDate={props.otherDate} displaySwitchButton={props.displaySwitchButton} >
       {scheduleBars}
     </ScheduleBarComponentScaffold>
   );
@@ -94,6 +122,7 @@ const ScheduleBar = (props) => {
       });
   }, []);
   return (
+   
     <StyledSceduleBar>
       <StyledUpperDiv>
         <StyledTimeDiv ref={timeRef}>
@@ -123,6 +152,7 @@ const ScheduleBar = (props) => {
         <p>Fem1i4i872@gmail.com, 080837262672</p>
       </StyledFooter>
     </StyledSceduleBar>
+   
   );
 };
 

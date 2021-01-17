@@ -6,7 +6,7 @@ import {device} from '../../../globalAccets/breakbpoints';
 
 export const IconBorder = (props) => {
     return (
-        <StyledAppointmentsIcon large={props.large} color={props.color} borderColor={props.borderColor}>
+        <StyledAppointmentsIcon onClick={props.onClick} large={props.large} color={props.color} borderColor={props.borderColor}>
             {props.icon}
         </StyledAppointmentsIcon>
     )

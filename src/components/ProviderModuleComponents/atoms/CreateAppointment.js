@@ -8,28 +8,12 @@ import {
 } from 'react-icons/io';
 import laughingHeads from '../../../globalAccets/images/laughingHeads.png';
 import fileIcon from '../../../globalAccets/images/fileIcon.png';
+import {EmptyTablets } from './EmptyTablets';
 
 export const CreateAppointment = (props) => {
   return (
-    <>
-      <StyledTablet>
-        <StyledSkeleton>
-          <div></div>
-          <div></div>
-        </StyledSkeleton>
-        <div>
-          <img src={laughingHeads} alt='' />
-        </div>
-      </StyledTablet>
-      <StyledTablet>
-        <StyledSkeleton>
-          <div></div>
-          <div></div>
-        </StyledSkeleton>
-        <div>
-          <img src={fileIcon} alt='' />
-        </div>
-      </StyledTablet>
+    <StyledContainer>
+      <EmptyTablets/>
       <StyledUpcomingEventFooter>
         <h1>Create an Appointment</h1>
         <p>
@@ -41,74 +25,21 @@ export const CreateAppointment = (props) => {
           <p>Add New Appointment</p>
         </StyledMediumButton>
       </StyledUpcomingEventFooter>
-    </>
+    </StyledContainer>
   );
 };
 
-const StyledTablet = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 70vw;
-  box-shadow: 0px 8.49057px 16.9811px rgba(169, 174, 181, 0.21);
-  border-radius: 6.1597px;
-  padding: 10px 20px;
 
-  &:nth-child(2) {
-    margin-top: 10px;
-    margin-bottom: 40px;
-  }
-  & > div:nth-child(2) {
-    width: 30%;
-    object-fit: contain;
-    & img {
-      width: 80%;
-
-      height: auto;
-    }
-  }
-
- 
-
-
-
-  @media ${device.tablet} {
-    width: 30vw;
-  }
-
-  @media ${device.laptop} {
-    width: 20vw;
-  }
-
-  @media ${device.laptopL} {
-    width: 17vw;
-  }
+const StyledContainer = styled.div`
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
 `
-
-const StyledSkeleton = styled.div`
-  width: 70%;
-  & > div {
-    background-color: #dfe5ec;
-    border-radius: 6.2px;
-    height: 11px;
-
-    &:first-child {
-      width: 60%;
-    }
-
-    &:nth-child(2) {
-      width: 80%;
-      margin-top: 10px;
-      opacity: 0.5;
-    }
-  }
-`
-
 const StyledUpcomingEventFooter = styled.div`
   text-align: center;
-  width: 70vw;
+  width: 80vw;
   display: grid;
   place-items: center;
-
 
   & h1{
         font-family: ${fontFamily.heading};

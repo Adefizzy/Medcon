@@ -21,10 +21,11 @@ export const ScheduleBarComponentScaffold = (props) => {
                   <p>Switch to Calendar view</p>
                 </StyledSwitch>}
                 <IconBorder
-                  icon={<StyledMdAddCircle />}
-                  large={true}
-                  borderColor='#CEDCE2'
-                  color={theme.secondaryColor}
+                    onClick={props.onClick}
+                    icon={<StyledMdAddCircle />}
+                    large={true}
+                    borderColor='#CEDCE2'
+                    color={theme.secondaryColor}
                 />
               </div>
             )}
