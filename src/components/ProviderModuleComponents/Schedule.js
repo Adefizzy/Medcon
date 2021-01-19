@@ -33,6 +33,7 @@ import { ScheduleBarComponentScaffold } from './atoms/ScheduleBarComponentScaffo
 import {useScreenNameContext} from '../context/screenNameContext';
 import { CreateAppointmentForm } from './CreateAppointmentForm';
 import { CreateAppointmentFormEmpty } from './CreateAppointmentFormEmpty';
+import { ScheduleCalendar } from './ScheduleCalendar';
 
 const data = [
   { date: { day: 'Monday', otherDate: 'January 3, 2021' }, schedule: [1, 2] },
@@ -56,6 +57,10 @@ export const Schedule = (props) => {
         history.push(`${url}/create-appointment`)
     }
 
+    const handleSwitch = () => {
+      history.push(`${url}/calender`)
+    }
+
     const scheduleList = data.map((item, index) => {
         if (index === 0) {
         return (
@@ -66,6 +71,7 @@ export const Schedule = (props) => {
             data={item.schedule}
             displaySwitchButton={true}
             onClick = {handleCreateAppointment}
+            handleSwitch={handleSwitch}
             />
         );
         }
@@ -90,6 +96,9 @@ export const Schedule = (props) => {
     <Route path={`${path}/create-appointment-empty`}>
         <CreateAppointmentFormEmpty/>
     </Route>
+    <Route path={`${path}/calender`}>
+        <ScheduleCalendar/>
+    </Route>
     </Switch> 
   );
 };
@@ -100,7 +109,7 @@ const ScheduleBarComponent = (props) => {
     return <ScheduleBar key={index} />;
   });
   return (
-    <ScheduleBarComponentScaffold onClick={props.onClick} day = {props.day} otherDate={props.otherDate} displaySwitchButton={props.displaySwitchButton} >
+    <ScheduleBarComponentScaffold handleSwitch={props.handleSwitch} onClick={props.onClick} day = {props.day} otherDate={props.otherDate} displaySwitchButton={props.displaySwitchButton} >
       {scheduleBars}
     </ScheduleBarComponentScaffold>
   );

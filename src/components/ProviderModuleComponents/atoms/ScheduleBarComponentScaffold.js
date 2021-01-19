@@ -16,7 +16,7 @@ export const ScheduleBarComponentScaffold = (props) => {
             </p>
             {props.displaySwitchButton && (
               <div>
-                {!props.hideSwitch && <StyledSwitch>
+                {!props.hideSwitch && <StyledSwitch onClick={props.handleSwitch}>
                   <StyledFiRefreshCcw />
                   <p>Switch to Calendar view</p>
                 </StyledSwitch>}
@@ -76,6 +76,7 @@ const StyledSwitch = styled.div`
   background-color: #fff;
   padding: 10px 15px;
   margin-right: 20px;
+  cursor: pointer;
 
   & p {
     margin-left: 10px;
