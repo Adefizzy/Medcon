@@ -47,6 +47,10 @@ export const CreateAppointmentFormEmpty = (props) => {
         history.goBack()
         setCurrentPageName('Schedule')
     }
+
+    const onViewSchedule = () => {
+        history.push('/provider-module/schedule');
+    }
     return (
         <Col xs={{span: 24}} lg={{span: 16}}>
             <StyledBackButton onClick={handleBackNav}>
@@ -61,7 +65,7 @@ export const CreateAppointmentFormEmpty = (props) => {
 Make sure you check your full schedule to see your<br/> upcoming appointments.</p>
             </StyledEmptyContainer>
            
-           <PrimaryButtonComponent buttonText='View Schedule' width='100%'/>
+           <PrimaryButtonComponent buttonText='View Schedule' width='100%' onClick={onViewSchedule}/>
         </StyledCreateAppointmentForm>
         </Col>
     );

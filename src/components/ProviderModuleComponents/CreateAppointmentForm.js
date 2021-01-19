@@ -44,6 +44,12 @@ export const CreateAppointmentForm = (props) => {
         setCurrentPageName('Create Appointment')
     }, [])
 
+
+    const onCreateAppointment = () => {
+        history.push('/provider-module/schedule/create-appointment-empty');
+     
+    }
+
    
     return (
         <Col xs={{span: 24}} lg={{span: 16}}>
@@ -72,7 +78,7 @@ export const CreateAppointmentForm = (props) => {
                 
             </div>
 
-           <PrimaryButtonComponent buttonText='Create Appointment' width='100%'/>
+           <PrimaryButtonComponent buttonText='Create Appointment' width='100%' onClick={onCreateAppointment}/>
         </StyledCreateAppointmentForm>
         </Col>
     );

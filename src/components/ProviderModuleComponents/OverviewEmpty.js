@@ -7,7 +7,7 @@ import { theme } from '../../globalAccets/theme';
 import { FiMenu, FiX,  FiTrendingUp, FiBookmark, FiUsers, FiLogOut, FiSettings, FiBell, FiLayout,  FiPlus, FiCheckSquare, FiClock} from 'react-icons/fi';
 import { GoHome } from 'react-icons/go';
 import {Skeleton, Statistic, Avatar, Col, Row} from 'antd';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 import { IoMdCalendar, IoIosArrowRoundForward, IoIosPlay, IoMdPeople } from 'react-icons/io';
 import { UserOutlined } from '@ant-design/icons';
@@ -39,7 +39,8 @@ export const OverviewEmpty = (props) => {
         {name: 'Schedule', icon: <FiBookmark/>, isActive: false},
         {name: 'Patients', icon: <FiUsers/>, isActive: false},
     ]);
-    const { setCurrentPageName } = useScreenNameContext()
+    const { setCurrentPageName } = useScreenNameContext();
+    const history = useHistory();
 
     useEffect(() => {
         setCurrentPageName('Overview')
@@ -59,16 +60,20 @@ export const OverviewEmpty = (props) => {
                 <StyledLink isActive={item.isActive} >{item.name}</StyledLink> 
             </StyledNav> 
     )
+
+    const handleCreateAppointmentNavigation = () => {
+        history.push('/provider-module/schedule/create-appointment');
+    }
     return (
         <>
         <StatSummarySegment/>
         <StyledMainStatBody xs={{span: 24}}>
                 <div>
-                    <QuickAction/>
+                    <QuickAction onClick={handleCreateAppointmentNavigation}/>
                     <EmptyWaitingList/>
                 </div>
                 <div>
-                    <EmptyUpcomingEvents/>
+                    <EmptyUpcomingEvents onClick={handleCreateAppointmentNavigation}/>
                 </div>
                 
             </StyledMainStatBody>
@@ -200,16 +205,16 @@ const EmptyUpcomingEvents = (props) => {
     return (
         <TitledCard  title='Upcoming events' titleFooter='Schedule meetings and calls'>
            <StyledEmptyUpcomingEvents>
-             <CreateAppointment/>
+             <CreateAppointment onClick={props.onClick}/>
            </StyledEmptyUpcomingEvents>
         </TitledCard>
     )
 }
 
-const QuickAction = () => {
+const QuickAction = (props) => {
     return (
         <TitledCard  title='Quick actions' titleFooter='Plan a meeting or start a call'>
-           <StyledExtraLargeButton>
+           <StyledExtraLargeButton onClick={props.onClick}>
                <StyledIoMdPeople/>
                <p>Add New Appointment</p>
            </StyledExtraLargeButton>

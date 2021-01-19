@@ -42,6 +42,9 @@ import {Table} from './atoms/Table';
 import { PerformanceTableRow} from './atoms/performanceTableRow';
 import { ProfileTableRow} from './atoms/profileTableRow';
 import { BackButton } from './atoms/BackButton';
+import { UpcomingEvents } from './atoms/UpcomingEvent';
+import { SingleSchedule } from './atoms/SingleSchedule';
+import { ArrowButton } from './atoms/ArrowButton';
 
 const { Option } = Select;
 
@@ -114,7 +117,7 @@ export const PatientProfile = (props) => {
     }
 
     const handleSessionClicked = (name) => {
-        console.log(name);
+
         const newSessionTitleState = sessionTitleState.map(item => {
             if(item.name === name){
                 item.isActive = true;
@@ -141,6 +144,61 @@ export const PatientProfile = (props) => {
         <Col xs={{span: 24}}>
             <StyledSpace></StyledSpace>
         </Col>
+
+        <StyledStatContainer>
+            <StyledStatCard>
+                <StyledNameContainer>
+                    <StyledAbbr>
+                        <p>PA</p>
+                    </StyledAbbr>
+                    <StyledName>
+                        <h1>{id}</h1>
+                        <p>Ahmed@gmail.com,</p>
+                    </StyledName>
+                </StyledNameContainer>
+                <Divider/>
+                <StyledUserInfoContainer>
+                    <StyledUserInfo>
+                        <p>Phone number</p>
+                        <h4>09038372924</h4>
+                    </StyledUserInfo>
+                    <StyledUserInfo>
+                        <p>Date of birth</p>
+                        <h4>10/11/1991</h4>
+                    </StyledUserInfo>
+                    <StyledUserInfo>
+                        <p>Total sessions</p>
+                        <h4>11</h4>
+                    </StyledUserInfo>
+                </StyledUserInfoContainer>
+                <Divider style={{marginBottom: '0px'}}/>
+                <StyledSessionStat>
+                    <div>
+                        <h4>10</h4>
+                        <p>Complete sessions</p>
+                    </div>
+                    <div>
+                        <h4 style={{color: '#F59292'}}>01</h4>
+                        <p>Declined sessions</p>
+                    </div>
+                    <div>
+                        <h4 style={{color: theme.secondaryColor}}>$142.00</h4>
+                        <p>Total paid</p>
+                    </div>
+                </StyledSessionStat>
+            </StyledStatCard>
+            <div style={{width: '49%'}}>
+
+            <UpcomingEvents>
+                <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>}  button={<ArrowButton/>}/>
+                <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>}  button={<ArrowButton/>}/>
+                <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>}  button={<ArrowButton/>}/>
+                <SingleSchedule timeIcon={<TimeIcon borderColor='#36C298' color='#36C298'/>}  button={<ArrowButton/>}/>
+            </UpcomingEvents>
+
+            </div>
+            
+        </StyledStatContainer>
         
         <Table
             tableRow={tableRow}
@@ -167,358 +225,163 @@ export const PatientProfile = (props) => {
 }
 
 
-const DateInput = (props) => {
-    return (
-        <StyledFilterLocation>
-            <StyledDatePicker placeholder='10-06-2021' suffixIcon={<FiChevronDown/>} bordered={false} format={moment().format('DD-MM-YYYY')}/>
-        </StyledFilterLocation>
-    )
-}
 
-/* const AnalyticTableRow = (props) => {
-    return (
-        <tr>
-            <StyledBlackTd>{props.data.sessionTitle}</StyledBlackTd>
-            <StyledfadeTd>{props.data.location}</StyledfadeTd>
-            <td>{props.data.patient}</td>
-            <StyledSpecialFontTd className='specialFont'>{props.data.timeStamp}</StyledSpecialFontTd>
-            <td> <StyledFancyTd>{props.data.amountPaid}</StyledFancyTd></td>
-        </tr>
-    )
-} */
 
 
 const StyledSpace = styled.div`
     height: 40px;
 `
 
-
-
-const StyledContainer = styled.div`
-     width: 100%;
-    background-color: #fff;
-    border-radius: 16px; 
-     overflow: hidden;
-     box-shadow: inset 0px -1px 0px #EDF2F7;
-     border: 1px solid #EDF2F7;
-`
-const StyledTable = styled.table`
-    width: 100%;
-    background-color: #fff;
-`
-
-const StyledTableHead = styled.thead`
-    background-color: #FAFAFB;
-    text-transform: uppercase;
-
-    & tr{
-    
-        & th{
-            padding-top: 24px;
-            padding-bottom: 24px;
-            font-family: ${fontFamily.heading};
-            color: #8492A6;
-            font-weight: 500;
-            font-size: 10px;
-
-            &:first-child{
-                padding-left: 24px;
-            }
-        }
-    }
-
-    @media ${device.laptop}{
-        & tr{
-            & th{
-                font-size: 0.7vw;
-            }
-        }
-    }
-`
-const StyledHeader = styled.div`
-    width: 100%;
+const StyledStatContainer = styled.div`
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 24px 20px 24px;
-
-    
-
-    & > div:first-child{
-        display: flex;
-        align-items: center;
-
-        & > p{
-        font-weight: 500;
-        font-family: ${fontFamily.heading};
-        font-size: 14px;
-        color: #1F2D3D;
-        margin: 0px;
-        }
-    }
-
-    @media ${device.laptop}{
-
-        & > div:first-child{
-            & > p{
-                
-                font-size: 0.97vw;
-            
-            }
-        }
-    }
-`
-
-
-const StyledTableBody = styled.tbody`
-    & tr{
-        
-    }
-
-    & td{
-        padding-top: 16px;
-        padding-bottom: 16px;
-        font-size: 14px;
-        font-family: ${fontFamily.heading};
-        border-bottom: 1px solid #EDF2F7;
-
-
-        &:first-child{
-            padding-left: 24px;
-        }
-    }
-
-    & .specialFont{
-        font-family: ${fontFamily.body};
-        font-weight: 400;
-        color: #425466;
-    }
-
-    @media ${device.laptop}{
-        & td{
-            font-size: 0.97vw;
-        }
-    }
-`
-
-const StyledSpecialFontTd = styled.td`
-    font-family: ${fontFamily.Inter} !important;
-    font-weight: 400;
-`
-
-const StyledBlackTd = styled.td`
-    color: #27272E;
-    font-weight: 500;
-`
-
-const StyledfadeTd = styled.td`
-    color: ${theme.secondaryColor};
-`
-
-
-
-const StyledFancyTd = styled.div`
-    width: fit-content;
-    height: fit-content;
-    background-color: #DEFFEE;
-    padding: 4px 10px;
-    color: #66CB9F;
-`
-
-const StyledTableFooter = styled.div`
     width: 100%;
-    display: flex;
-    align-items: center;
+    margin-bottom: 40px;
     justify-content: space-between;
-    padding: 20px 24px;
-    padding-top: 50px;
+`
+
+const StyledStatCard = styled.div`
+    background-color: #FFFFFF;
+    border-radius: 16px;   
+    width: 49%; 
+    padding-top: 36px;
+`
+
+const StyledNameContainer = styled.div`
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+`
+
+const StyledAbbr = styled.div`
+    height: 4vw;
+    width: 4vw;
+    border-radius: 16px;
+    background-color: ${theme.secondaryColor};
+    display: grid;
+    place-items: center;
 
 
     & p{
-        font-family: ${fontFamily.Inter};
-        font-weight: 400;
-        font-size: 14px;
-        color: #7A7A9D;
         margin: 0px;
+        font-weight: 700;
+        font-family: ${fontFamily.Inter};
+        color: #fff;
+        font-size: 17px;
+    }
+`
+
+const StyledName = styled.div`
+    margin-left: 20px;
+    & h1{
+        font-size: 18px;
+        font-family: ${fontFamily.heading};
+        font-weight: 700;
+        color: #2D3743;
+    }
+
+    & p{
+        font-family: ${fontFamily.body};
+        font-weight: 400;
+        font-size: 12px;
+    }
+`
+
+const StyledUserInfoContainer = styled.div`
+    display: flex;
+    width: 85%;
+    margin: 0 auto;
+    justify-content: space-between;
+`
+
+const StyledUserInfo = styled.div`
+    font-family: ${fontFamily.body};
+    text-align: center;
+
+    & p{
+        
+        font-weight: 400;
+        font-size: 12px;
+        color: #8F92A1;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    & h4{
+        font-weight: 600;
+        color: #2D3743;
+        font-size: 14px;
     }
 
     @media ${device.laptop}{
         & p{
-       
-            font-size: 0.97vw;
-        
-        }
-    }
-`
-
-const StyledPagination = styled(Pagination)`
-    & .anticon svg {
-        border: 1px solid ${theme.mutedColor};
-        font-size: 25px;
-        padding: 5px;
-        border-radius: 5px;
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-
-    & .ant-pagination-item a {
-        color: ${theme.mutedColor};
-        font-family: ${fontFamily.body};
-    }
-
-    & .ant-pagination-item-active a{
-        color: ${theme.secondaryColor};
-        font-weight: bolder;
-    }
-
-    &.ant-pagination-item-active{
-        background-color: transparent;
-        border-color: transparent;
-
-        &:hover, &:active, &:focus{
-            background-color: transparent;
-            border-color: transparent;
-        }
-
-    }
-
-    @media ${device.laptop}{
-        & .anticon svg {
-            font-size: 1.9vw;
-        }
-    }
-`
-
-const StyledSearchInput = styled.div`
-    border: 1px solid #E7E8E9;
-    border-radius: 5px;
-    min-width: 18vw;
-`
-const StyledFiSearch = styled(FiSearch)`
-    color: #92929D;
-    font-size: 16px;
-
-    @media ${device.laptop}{
-        font-size: 1.1vw;
-    }
-`
-
-const StyledInput = styled(Input)`
-    font-family: ${fontFamily.body};
-    font-weight: 400;
-    font-size: 10.76px;
-
-    @media ${device.laptop}{
-        font-size: 1.06vw;
-    }
-`
-
-const StyledShowType = styled.div`
-    display: flex;
-    align-items: center;
     
-    justify-content: center;
-    font-family: ${fontFamily.heading};
-    font-size: 11px;
-    margin-left: 20px;
-
-    & p{
-        margin: 0px;
-        color: #7A7A9D;
-    }
-
-
-    @media ${device.laptop}{
-        font-size: 0.9vw; ;
-    }
-`
-
-const StyledSelect = styled(Select)`
-    font-size: 11px;
-    color: ${theme.black};
-    font-weight: 500;
-    width: 100px;
-
-    .ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
-        padding: 0px 0px 0px 2px !important;
-    }
-
-    @media ${device.laptop}{
-        font-size: 0.7vw;
-        width: 7vw;
-    }
-
-`
-
-const StyledTableMainHeader = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-
-    & h1{
-        font-family: ${fontFamily.heading};
-        font-weight: 700;
-        font-size: 18px;
-        color: #27272E;
-        margin: 0px;
-    }
-`
-
-const StyledFilterDiv = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .dateDivider{
-        color: #7A7A9D;
-        font-size: 18px;
-        margin-left: 10px;
-    }
-`
-
-const StyledFilterLocation = styled.div`
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    border: 0.725px solid #E2E2EA;
-    cursor: pointer;
-
-
-    background-color: #fff;
-    border-radius: 5px;
-
-    font-family: ${fontFamily.body};
-    font-size: 11px;
-    padding-left: 5px;
-
-    & p{
-        margin: 0px;
-        color: #7A7A9D;
-    }
-`
-
-const StyledDatePicker = styled(DatePicker)`
-    font-family: ${fontFamily.body};
-    padding: 7px 5px;
-    
-    & .ant-picker-input > input:placeholder-shown{
-        font-size: 11px;
+        font-size: 0.9vw;
        
     }
 
-    & .ant-picker-input > input{
-        color: #030229;
-        font-size: 11px;
+    & h4{
+        font-weight: 600;
+        color: #2D3743;
+        font-size: 0.97vw;
+    }
     }
 `
 
-const StyledExport = styled(StyledFilterLocation)`
-    justify-content: center;
+const StyledSessionStat = styled.div`
+    display: flex;
     font-family: ${fontFamily.body};
-    font-weight: 600;
-    color: #16192C;
-    padding: 7px 10px;
-`
+    /* width: 85%;
+    margin: 0 auto; */
 
+    & div{
+        height: 100%;
+        flex-basis:33.33%;
+        padding: 36px 0px;
+        text-align: center;
+        display: grid;
+        place-items: center;
+        height: 100%;
+        border-right: 1px solid rgba(0, 0, 0, 0.06);
+
+        & h4{
+            font-size: 18px;
+            color: #219653;
+            font-weight: 600;
+        }
+
+        & p{
+            margin: 0px;
+            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #8F92A1;
+            font-size: 12px;
+        }
+
+
+        &:last-child{
+            border-right: none;
+        }
+    }
+
+
+    @media ${device.laptop}{
+
+
+    & div{
+    
+
+        & h4{
+            font-size: 1.3vw;
+            
+        }
+
+        & p{
+           
+            font-size: 0.86vw;
+        }
+    }
+
+    }
+
+`

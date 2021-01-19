@@ -20,7 +20,7 @@ export const CreateAppointment = (props) => {
           An appointment easily allows you to find
           <br /> the perfect time for your patient sessions
         </p>
-        <StyledMediumButton>
+        <StyledMediumButton onClick={props.onClick}>
           <StyledSmallIoMdPeople />
           <p>Add New Appointment</p>
         </StyledMediumButton>

@@ -20,6 +20,7 @@ import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaiti
 import {ScreenNameContext} from '../context/screenNameContext';
 import { Analytic } from './Analytic'
 import { PatientManagement } from './PatientManagement';
+import logo2 from './../../globalAccets/images/logo2.png'
 /* 
 const navItems = [
     {name: 'Overview', icon: <HomeIcon/>},
@@ -39,8 +40,8 @@ export const ProviderModule = (props) => {
     const history = useHistory();
     const [navItems, setNavItems]  = useState([
         {name: 'Overview', icon: <GoHome/>, isActive: true},
-        {name: 'Analytic', icon: <FiTrendingUp/>, isActive: false},
         {name: 'Schedule', icon: <FiBookmark/>, isActive: false},
+        {name: 'Analytic', icon: <FiTrendingUp/>, isActive: false},
         {name: 'Patient', icon: <FiUsers/>, isActive: false},
     ]);
 
@@ -78,9 +79,10 @@ export const ProviderModule = (props) => {
         <ScreenNameContext.Provider value={{setCurrentPageName}}>
         <StyledUpcomingEventScaffold>
             <StyledSideBar lg={{span:4}}>
-                <div style={{marginLeft: '25px', marginTop: '10px', marginBottom: '20px'}}>
-                    <Logo/>
-                </div>
+                <StyledLogoDiv>
+                    {/* <Logo/> */}
+                    <img src={logo2}/>
+                </StyledLogoDiv>
                 {sidebarNav}
                 <Divider />
                 <StyledNav isActive={false} >
@@ -95,7 +97,10 @@ export const ProviderModule = (props) => {
             <StyledMainContainer lg={{span:20}}>
                 <Row>
             <StyledHeader xs={{span: 24}}>
-                <Logo/>
+                 <StyledLogoDiv style={{width: '20%'}}>
+                    {/* <Logo/> */}
+                    <img src={logo2}/>
+                </StyledLogoDiv>
                 <FiMenu onClick={handleOpenSideBar}/>
             </StyledHeader>
             <StyledTitleHeaderDiv xs={{span: 24}}>
@@ -148,7 +153,10 @@ export const ProviderModule = (props) => {
            
             
             <Drawer
-                title={<Logo/>}
+                title={ <StyledLogoDiv>
+                {/* <Logo/> */}
+                <img src={logo2}/>
+            </StyledLogoDiv>}
                 placement="left"
                 closable={false}
                 onClose={onCloseSideBar}
@@ -893,4 +901,16 @@ const StyledExtraLargeButton = styled(StyledButton)`
 const StyledIoMdPeople = styled(IoMdPeople)`
     font-size: 24px;
     transform: rotateY(180deg);
+`
+
+const StyledLogoDiv = styled.div`
+    margin-left: 25px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+
+  width: 60%;
+
+     & img{
+         width: 100%;
+     }
 `

@@ -4,6 +4,9 @@ import { device } from '../../globalAccets/breakbpoints';
 import { Logo } from '../../globalAccets/svgs/Logo';
 import { fontFamily } from '../../globalAccets/fontFamily';
 import { theme } from '../../globalAccets/theme';
+import statIcon1 from '../../globalAccets/images/statIcon1.png';
+import statIcon2 from '../../globalAccets/images/statIcon2.png';
+import statIcon3 from '../../globalAccets/images/statIcon3.png';
 import { FiChevronDown, FiSearch} from 'react-icons/fi';
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { GoHome } from 'react-icons/go';
@@ -88,6 +91,28 @@ export const Analytic = (props) => {
 
     return (
         <>
+        <StyledStatContainer>
+            <div>
+                <StyledStatCard>
+                    <StatTablet icon={statIcon2} title='Total Session' count='20, 039' color='#D8F3FF'/>
+                    <StyledDivider>
+                        <Divider />
+                    </StyledDivider>
+                    <SessionCount title='Walk-in-Sessions' count='1,039' color='#4C6FFF'/>
+                    <SessionCount title='Teleconsult Sessions' count='1,039' color='#308CB4'/>
+                    <SessionCount title='Accepted Sessions' count='1,039' color='#219653'/>
+                    <SessionCount title='Declined Sessions' count='1,039' color='#BC1818'/>
+                </StyledStatCard>
+            </div>
+            <div>
+                <StyledStatCard>
+                    <StatTablet icon={statIcon3} title='Total co-pay' count='$90,000,000' color='#DEFFEE'/>
+                </StyledStatCard>
+                <StyledStatCard>
+                    <StatTablet icon={statIcon1} title='Session Durations(hr)' count='200' color='#FBF1E6'/>
+                </StyledStatCard>
+            </div>
+        </StyledStatContainer>
         <Table
             sessionName='Session Performance'
             tableRow={tableRow}
@@ -102,436 +127,169 @@ export const Analytic = (props) => {
             currentPage={currentPage}
             isActive={true}
         />
-        {/* <StyledTableMainHeader>
-            <h1>Session Performance</h1>
-            <StyledFilterDiv>
-                <StyledFilterLocation>
-                    <p>Location:</p>
-                    <StyledSelect defaultValue='All' bordered={false} suffixIcon={<TiArrowSortedDown/>}>
-                        <Option value='All'>All</Option>
-                        <Option value='Brooklyn'>Brooklyn</Option>
-                        <Option value='Madison'>Madison</Option>
-                    </StyledSelect>
-                </StyledFilterLocation>
-                <DateInput/> <span className='dateDivider'>:</span>
-                <DateInput/>
-                <StyledFilterLocation>
-                    <p>Sort by:</p>
-                    <StyledSelect defaultValue='All' bordered={false} suffixIcon={<TiArrowSortedDown/>}>
-                        <Option value='All'>Latest</Option>
-                        <Option value='Brooklyn'>oldest</Option>
-                    </StyledSelect>
-                </StyledFilterLocation>
-                <StyledExport>Export CSV</StyledExport>
-            </StyledFilterDiv>
-        </StyledTableMainHeader> 
-        <StyledContainer>   
-        <StyledHeader>
-            <div>
-                <p>All Provider Sessions</p>
-                {true && <StyledShowType>
-                    <p>Show:</p>
-                    <StyledSelect defaultValue='This Month'  bordered={false} suffixIcon={<TiArrowSortedDown/>}>
-                        <Option value= 'All'>All</Option>
-                        <Option value='This Year'>This Year</Option>
-                        <Option value='This Month'>This Month</Option>
-                        <Option value='This Week'>This Week</Option>
-                    </StyledSelect>
-                </StyledShowType>}
+      </>
+    )
+}
+
+const StatTablet = (props) => {
+    return (
+        <StyledStatTablet>
+            <div style={{backgroundColor: props.color}}>
+                <div>
+                    <img src={props.icon} alt=''/>
+                </div>
             </div>
-            
-            {props.showSearch && <StyledSearchInput>
-                <StyledInput placeholder='Search...' prefix={<StyledFiSearch/>} bordered={false}/>
-            </StyledSearchInput>}
-            
-        </StyledHeader>
-        <StyledTable>
-            <StyledTableHead>
-                <tr>
-                    <th>session title</th>
-                    <th>location</th>
-                    <th>patient</th>
-                    <th>timestamp</th>
-                    <th>amount paid</th>
-                </tr>
-            </StyledTableHead>
-            <StyledTableBody>
-                {tableRow}
-               
-            </StyledTableBody>
-        </StyledTable> 
-        <StyledTableFooter>
-        <p>{`Showing ${start} - ${currentPage * pageSize} items out  of ${analyticData.length} result found`}</p>
-        <StyledPagination  
-            onChange={handlPaginationChange} 
-            pageSize={pageSize} 
-            current={currentPage} 
-            defaultCurrent={1} 
-            total={analyticData.length}
-            showSizeChanger={false}
-            size="small"
-
-        />
-        </StyledTableFooter>
-        </StyledContainer> */}
-        </>
-    
+            <div>
+                <p>{props.title}</p>
+                <h1>{props.count}</h1>
+            </div>
+        </StyledStatTablet>
     )
 }
 
-
-const DateInput = (props) => {
+const SessionCount = (props) => {
     return (
-        <StyledFilterLocation>
-            <StyledDatePicker placeholder='10-06-2021' suffixIcon={<FiChevronDown/>} bordered={false} format={moment().format('DD-MM-YYYY')}/>
-        </StyledFilterLocation>
+        <StyledSessionCount>
+            <p style={{color: props.color}}>{props.title}</p>
+            <h4>{props.count}</h4>
+        </StyledSessionCount>
     )
 }
 
-/* const AnalyticTableRow = (props) => {
-    return (
-        <tr>
-            <StyledBlackTd>{props.data.sessionTitle}</StyledBlackTd>
-            <StyledfadeTd>{props.data.location}</StyledfadeTd>
-            <td>{props.data.patient}</td>
-            <StyledSpecialFontTd className='specialFont'>{props.data.timeStamp}</StyledSpecialFontTd>
-            <td> <StyledFancyTd>{props.data.amountPaid}</StyledFancyTd></td>
-        </tr>
-    )
-} */
-
-
-
-const StyledContainer = styled.div`
-     width: 100%;
-    background-color: #fff;
-    border-radius: 16px; 
-     overflow: hidden;
-     box-shadow: inset 0px -1px 0px #EDF2F7;
-     border: 1px solid #EDF2F7;
-`
-const StyledTable = styled.table`
-    width: 100%;
-    background-color: #fff;
-`
-
-const StyledTableHead = styled.thead`
-    background-color: #FAFAFB;
-    text-transform: uppercase;
-
-    & tr{
-    
-        & th{
-            padding-top: 24px;
-            padding-bottom: 24px;
-            font-family: ${fontFamily.heading};
-            color: #8492A6;
-            font-weight: 500;
-            font-size: 10px;
-
-            &:first-child{
-                padding-left: 24px;
-            }
-        }
-    }
-
-    @media ${device.laptop}{
-        & tr{
-            & th{
-                font-size: 0.7vw;
-            }
-        }
-    }
-`
-const StyledHeader = styled.div`
+const StyledStatContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 20px 24px 20px 24px;
+    margin-bottom: 40px;
+    & > div{
+        flex-basis: 48.5%;
+    }
 
-    
+    & > div:last-child{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+`
+
+const StyledStatCard = styled.div`
+    box-shadow: 0px 0px 1.73853px rgba(12, 26, 75, 0.24), 0px 5.2156px 13.9083px -1.73853px rgba(50, 50, 71, 0.05);
+    border-radius: 16px;
+    background: #FFFFFF;
+    width: 100%;
+    padding: 40px 0px;
+`
+
+const StyledStatTablet = styled.div`
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
 
     & > div:first-child{
-        display: flex;
-        align-items: center;
+        display: grid;
+        place-items: center;
+        height: 80px;
+        width:80px;
+        border-radius: 14.4762px;
 
-        & > p{
-        font-weight: 500;
-        font-family: ${fontFamily.heading};
-        font-size: 14px;
-        color: #1F2D3D;
-        margin: 0px;
+        &>div{
+            width: 40%;
+
+            & img{
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+
+    & > div:nth-child(2){
+        font-family: ${fontFamily.body};
+        margin-left: 30px;
+        & p{
+            font-weight: 500;
+            font-size: 18px;
+            color: #A9AEB5;
+            margin: 0px;
+        }
+
+        & h1{
+            font-weight: 600;
+            font-size: 32px;
+            color: #16192C;
         }
     }
 
     @media ${device.laptop}{
 
         & > div:first-child{
-            & > p{
+            height: 6vw;
+            width:6vw;
+        }
+
+
+        & > div:nth-child(2){
+           
+            & p{
+            
+                font-size: 1.25vw;
                 
-                font-size: 0.97vw;
+            }
+
+            & h1{
+              
+                font-size: 2.3vw;
             
             }
         }
+
     }
 `
 
-
-const StyledTableBody = styled.tbody`
-    & tr{
-        
-    }
-
-    & td{
-        padding-top: 16px;
-        padding-bottom: 16px;
-        font-size: 14px;
-        font-family: ${fontFamily.heading};
-        border-bottom: 1px solid #EDF2F7;
-
-
-        &:first-child{
-            padding-left: 24px;
-        }
-    }
-
-    & .specialFont{
-        font-family: ${fontFamily.body};
-        font-weight: 400;
-        color: #425466;
-    }
-
-    @media ${device.laptop}{
-        & td{
-            font-size: 0.97vw;
-        }
-    }
-`
-
-const StyledSpecialFontTd = styled.td`
-    font-family: ${fontFamily.Inter} !important;
-    font-weight: 400;
-`
-
-const StyledBlackTd = styled.td`
-    color: #27272E;
-    font-weight: 500;
-`
-
-const StyledfadeTd = styled.td`
-    color: ${theme.secondaryColor};
+const StyledDivider = styled.div`
+    width: 85%;
+    margin: 0 auto;
 `
 
 
-
-const StyledFancyTd = styled.div`
-    width: fit-content;
-    height: fit-content;
-    background-color: #DEFFEE;
-    padding: 4px 10px;
-    color: #66CB9F;
-`
-
-const StyledTableFooter = styled.div`
-    width: 100%;
+const StyledSessionCount = styled.div`
+    width: 85%;
+    margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 20px 24px;
-    padding-top: 50px;
+    font-family: ${fontFamily.body};
+    margin-bottom: 15px;
 
+    &:last-child{
+        margin-bottom: 0px;
+    }
 
     & p{
-        font-family: ${fontFamily.Inter};
-        font-weight: 400;
-        font-size: 14px;
-        color: #7A7A9D;
+        font-size: 15px;
+        margin: 0;
+    }
+
+    & h4{
+        color: ${theme.black};
+        font-size: 18px;
+        font-weight: 500;
         margin: 0px;
     }
 
     @media ${device.laptop}{
         & p{
-       
-            font-size: 0.97vw;
+            font-size: 1.05vw;
+
+        }
+
+        & h4{
+    
+            font-size: 1.25vw;
         
         }
     }
 `
 
-const StyledPagination = styled(Pagination)`
-    & .anticon svg {
-        border: 1px solid ${theme.mutedColor};
-        font-size: 25px;
-        padding: 5px;
-        border-radius: 5px;
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-
-    & .ant-pagination-item a {
-        color: ${theme.mutedColor};
-        font-family: ${fontFamily.body};
-    }
-
-    & .ant-pagination-item-active a{
-        color: ${theme.secondaryColor};
-        font-weight: bolder;
-    }
-
-    &.ant-pagination-item-active{
-        background-color: transparent;
-        border-color: transparent;
-
-        &:hover, &:active, &:focus{
-            background-color: transparent;
-            border-color: transparent;
-        }
-
-    }
-
-    @media ${device.laptop}{
-        & .anticon svg {
-            font-size: 1.9vw;
-        }
-    }
+const StyledOtherStats = styled.div`    
+    width: 50%;
 `
-
-const StyledSearchInput = styled.div`
-    border: 1px solid #E7E8E9;
-    border-radius: 5px;
-    min-width: 18vw;
-`
-const StyledFiSearch = styled(FiSearch)`
-    color: #92929D;
-    font-size: 16px;
-
-    @media ${device.laptop}{
-        font-size: 1.1vw;
-    }
-`
-
-const StyledInput = styled(Input)`
-    font-family: ${fontFamily.body};
-    font-weight: 400;
-    font-size: 10.76px;
-
-    @media ${device.laptop}{
-        font-size: 1.06vw;
-    }
-`
-
-const StyledShowType = styled.div`
-    display: flex;
-    align-items: center;
-    
-    justify-content: center;
-    font-family: ${fontFamily.heading};
-    font-size: 11px;
-    margin-left: 20px;
-
-    & p{
-        margin: 0px;
-        color: #7A7A9D;
-    }
-
-
-    @media ${device.laptop}{
-        font-size: 0.9vw; ;
-    }
-`
-
-const StyledSelect = styled(Select)`
-    font-size: 11px;
-    color: ${theme.black};
-    font-weight: 500;
-    width: 100px;
-
-    .ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
-        padding: 0px 0px 0px 2px !important;
-    }
-
-    @media ${device.laptop}{
-        font-size: 0.7vw;
-        width: 7vw;
-    }
-
-`
-
-const StyledTableMainHeader = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-
-    & h1{
-        font-family: ${fontFamily.heading};
-        font-weight: 700;
-        font-size: 18px;
-        color: #27272E;
-        margin: 0px;
-    }
-`
-
-const StyledFilterDiv = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .dateDivider{
-        color: #7A7A9D;
-        font-size: 18px;
-        margin-left: 10px;
-    }
-`
-
-const StyledFilterLocation = styled.div`
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    border: 0.725px solid #E2E2EA;
-    cursor: pointer;
-
-
-    background-color: #fff;
-    border-radius: 5px;
-
-    font-family: ${fontFamily.body};
-    font-size: 11px;
-    padding-left: 5px;
-
-    & p{
-        margin: 0px;
-        color: #7A7A9D;
-    }
-`
-
-const StyledDatePicker = styled(DatePicker)`
-    font-family: ${fontFamily.body};
-    padding: 7px 5px;
-    
-    & .ant-picker-input > input:placeholder-shown{
-        font-size: 11px;
-       
-    }
-
-    & .ant-picker-input > input{
-        color: #030229;
-        font-size: 11px;
-    }
-`
-
-const StyledExport = styled(StyledFilterLocation)`
-    justify-content: center;
-    font-family: ${fontFamily.body};
-    font-weight: 600;
-    color: #16192C;
-    padding: 7px 10px;
-`
-
-/* const StyledTiArrowSortedDown = styled(TiArrowSortedDown)`
-    border-left: 1px solid #7A7A9D;
-    padding-left: 5px;
-    font-size: 16px;
-` */
