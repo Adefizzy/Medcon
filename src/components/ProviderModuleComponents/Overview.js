@@ -14,6 +14,7 @@ import {TiArrowRight} from 'react-icons/ti';
 import { MdPeopleOutline } from 'react-icons/md'
 import {TimeIcon} from './atoms/TimeIcon';
 import {useScreenNameContext} from '../context/screenNameContext';
+import waitingIcon1 from '../../globalAccets/images/waitingIcon1.png';
 
 import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaitingIcon';
 
@@ -34,13 +35,17 @@ export const Overview = (props) => {
         history.push('/provider-module/schedule/create-appointment');
     }
 
+    const joinChatRoom = () => {
+        history.push('/provider-module/chatroom');
+    }
+
     return (
         <>
         <StatSummarySegment/>
         <StyledMainStatBody xs={{span: 24}}>
                 <div>
-                    <QuickAction onClick={handleCreateAppointmentNavigation}/>
-                    <WaitingList/>
+                    <QuickAction  onClick={handleCreateAppointmentNavigation}/>
+                    <WaitingList onClick={joinChatRoom}/>
                 </div>
                 <div>
                     <UpcomingEvents/>
@@ -57,7 +62,6 @@ const TopStatPane = (props) => {
     return (
         <StyledTopStatPane>
             <StyledImageDiv style={{backgroundColor: props.backgroundColor, color: props.iconColor}}>
-                {/* <img src={props.icon} alt=''/> */}
                 {props.icon}
             </StyledImageDiv>
             <StyledStatNumberDiv>
@@ -108,7 +112,11 @@ const StatSummarySegment = () => {
 const WaitingIcon = (props) => {
     return (
         <StyledWaitingIcon>
-            <AppointmentWaitingIcon/>
+       {/*      <div></div> */}
+                <img src={waitingIcon1} alt=''/>
+      
+            
+            {/* <AppointmentWaitingIcon/> */}
         </StyledWaitingIcon>
     )
 }
@@ -175,10 +183,10 @@ const AppointmentComponent = (props) => {
 const WaitingList = (props) => {   
     return (
         <TitledCard  title='Wait List (09)' titleFooter='Track your patient waitlist'>
-            <SingleSchedule timeIcon={<WaitingIcon/>} hideTime={true} button={<ActionButtons/>}/>
-            <SingleSchedule timeIcon={<WaitingIcon/>} hideTime={true} button={<ActionButtons/>}/>
-            <SingleSchedule timeIcon={<WaitingIcon/>} hideTime={true} button={<ActionButtons/>}/>
-            <SingleSchedule timeIcon={<WaitingIcon/>} hideTime={true} button={<ActionButtons/>}/>
+            <SingleSchedule timeIcon={<WaitingIcon/>} hideTime={true} button={<ActionButtons onClick={props.onClick}/>}/>
+            <SingleSchedule timeIcon={<WaitingIcon/>} hideTime={true} button={<ActionButtons onClick={props.onClick}/>}/>
+            <SingleSchedule timeIcon={<WaitingIcon/>} hideTime={true} button={<ActionButtons onClick={props.onClick}/>}/>
+            <SingleSchedule timeIcon={<WaitingIcon/>} hideTime={true} button={<ActionButtons onClick={props.onClick}/>}/>
         </TitledCard>
     )
 }
@@ -238,10 +246,10 @@ const SingleSchedule = (props) => {
     )
 }
 
-const ActionButtons = () => {
+const ActionButtons = (props) => {
     return (
-        <StyledActionButtons>
-            <StyledAcceptButton>Accept</StyledAcceptButton>
+        <StyledActionButtons >
+            <StyledAcceptButton onClick={props.onClick}>Accept</StyledAcceptButton>
             <StyledDeclineButton>Decline</StyledDeclineButton>
         </StyledActionButtons>
     )
@@ -406,7 +414,7 @@ const StyledTopStatPane = styled.div`
     margin-top: 20px;
     box-shadow: 0px 0px 4px #F0F3F5, 0px -8px 4px rgba(241, 244, 246, 0.06);
     width: 100%;
-
+ 
     @media ${device.laptop}{
         width: 24%;
     }
@@ -418,10 +426,14 @@ const StyledImageDiv = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    padding: 12px;
+    height: 50px;
+    width: 50px;
+   /*  padding: 12px; */
 
     @media ${device.laptop}{
-        font-size: 1.5vw;
+        font-size: 2vw;
+        height: 4vw;
+        width: 4vw;
     }
 `
 const StyledStatistic = styled(Statistic)`
@@ -435,7 +447,6 @@ const StyledStatistic = styled(Statistic)`
 
 const StyledStatNumberDiv = styled.div`
     margin-left: 20px;
-    height: 100%;
     & p{
         font-family: ${fontFamily.body};
         font-weight: 600;
@@ -443,24 +454,39 @@ const StyledStatNumberDiv = styled.div`
         &:first-child{
             color: ${theme.mutedColor};
             font-size: 12px;
-            line-height: 17px;
-            margin-bottom: 5px;
-
-
+            margin-bottom: 0px;
         }
 
         &:nth-child(2){
             font-size: 20px;
             font-weight: 600;
             font-family: ${fontFamily.body}; 
-            margin-bottom: 0px;
-            line-height: 17px;
+            margin: 0px;
          }
+    }
+
+
+
+    @media ${device.laptop}{
+        & p{
+    
+        &:first-child{
+         
+            font-size: 0.97vw;
+           
+
+
+        }
+
+        &:nth-child(2){
+            font-size: 1.5vw;
+         }
+    }
     }
 `
 
 const StyledStatSummaryDiv = styled(Col)`
-    /* width: 100%; */
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -554,6 +580,7 @@ const StyledMainStat = styled.div`
             justify-content: center;
             color: ${theme.secondaryColor};
             height: fit-content;
+           /*  border: 1px solid red; */
 
             & p{
                 margin: 0px;
@@ -564,7 +591,21 @@ const StyledMainStat = styled.div`
 
 
     @media ${device.laptop}{
-        
+        & > div:first-child{
+       
+
+        & div:first-child{
+            & p{
+               
+                font-size: 0.85vw;
+              
+            }
+
+            & h2{
+              
+                font-size: 1.15vw;
+            }
+        }}
     }
 `
 const StyledSingleSchedule = styled.div`
@@ -614,6 +655,18 @@ const StyledAppointmentDetail = styled.div`
     @media ${device.laptop}{
         margin: 0px;
         flex-basis: auto;
+
+        & div{
+            & p{
+                font-size: 0.7vw;
+            }
+        }
+
+        & > p{
+      
+        font-size: 0.97vw;
+       
+    }
     }
 `
 
@@ -663,8 +716,14 @@ const StyledScheduledTime = styled.div`
             justify-content: flex-start;
             & p{
                 height: fit-content;
+                &:first-child{
+                
+                font-size: 0.97vw;
+            }
+            
                 &:nth-child(2){
-                    margin-left: 0px; 
+                    margin-left: 0px;
+                    font-size: 0.7vw 
                 }
             }
             
@@ -692,6 +751,9 @@ const StyledArrowRight = styled.div`
     font-size: 18px;
     font-weight: 700;
 
+    @media ${device.laptop}{
+        font-size: 1.3vw;
+    }
 `
 
 const StyledSmallButton = styled.button`
@@ -706,6 +768,12 @@ const StyledSmallButton = styled.button`
     color: #fff;
     &:nth-child(2){
         margin-left: 10px;
+        
+    }
+
+
+    @media ${device.laptop}{
+        font-size: 0.7vw;
     }
 `
 
@@ -722,10 +790,26 @@ const StyledActionButtons = styled.div`
     align-items: center;
     justify-content: center;
 `
-const StyledWaitingIcon = styled(StyledAppointmentsIcon)`
+const StyledWaitingIcon = styled.div`
+     width: 40px;
+     height: 40px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     padding: 0px;
+     border-radius: 10px;
+     padding: 0 5px;
+     border: 1px solid #7188C2;
+
+        & img{
+         width: 100%;
+         height: auto;
+        }
+
     @media ${device.laptop}{
-        padding: 10px 4px;
-        border: 1px solid #7188C2;
+        
+        width: 2.7vw;
+        height: 2.7vw;
     }
 `
 
@@ -743,7 +827,7 @@ const StyledExtraLargeButton = styled(StyledButton)`
    
 
     @media ${device.tablet}{
-        font-size: 20px;
+        font-size: 0.97vw;
         & p{
             margin-left: 20px;
         }
@@ -753,4 +837,8 @@ const StyledExtraLargeButton = styled(StyledButton)`
 const StyledIoMdPeople = styled(IoMdPeople)`
     font-size: 24px;
     transform: rotateY(180deg);
+
+    @media ${device.tablet}{
+        font-size: 1.3vw;
+    }
 `

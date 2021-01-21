@@ -268,6 +268,13 @@ const StyledAbbr = styled.div`
         color: #fff;
         font-size: 17px;
     }
+
+    @media ${device.laptop}{
+        & p{
+       
+        font-size: 1.2vw;
+    }
+    }
 `
 
 const StyledName = styled.div`
@@ -283,6 +290,18 @@ const StyledName = styled.div`
         font-family: ${fontFamily.body};
         font-weight: 400;
         font-size: 12px;
+    }
+
+    @media ${device.laptop}{
+        & h1{
+        font-size: 1.25vw;
+        
+    }
+
+    & p{
+        
+        font-size: 0.85vw;
+    }
     }
 `
 

@@ -74,6 +74,24 @@ const StyledMainStat = styled.div`
 
 
     @media ${device.laptop}{
-        
+         
+
+    & > div:first-child{
+        display: flex;
+        justify-content: space-between;
+
+        & div:first-child{
+            & p{
+                font-size: 0.85vw;
+
+            }
+
+            & h2{
+                font-size: 1.2vw;
+            }
+        }
+    }
+       
+       
     }
 `

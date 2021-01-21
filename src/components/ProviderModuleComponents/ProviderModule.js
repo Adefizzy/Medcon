@@ -20,7 +20,9 @@ import { AppointmentWaitingIcon } from '../../globalAccets/svgs/AppointmentWaiti
 import {ScreenNameContext} from '../context/screenNameContext';
 import { Analytic } from './Analytic'
 import { PatientManagement } from './PatientManagement';
-import logo2 from './../../globalAccets/images/logo2.png'
+import logo2 from './../../globalAccets/images/logo2.png';
+import { ChatRoom } from '../ChatRoom';
+import { Alert } from './atoms/Alert';
 /* 
 const navItems = [
     {name: 'Overview', icon: <HomeIcon/>},
@@ -105,16 +107,13 @@ export const ProviderModule = (props) => {
             </StyledHeader>
             <StyledTitleHeaderDiv xs={{span: 24}}>
                 <StyledTitle>{currentPageName}</StyledTitle>
-                <StyledAlertAndButtondiv>
+                {/* <StyledAlertAndButtondiv>
                     <StyledAlertDiv style={{marginRight: '30px'}}>
                         <StyledFiBell/>
                         <Badge count={23} style={{padding:'0px 11px 0px 11px', backgroundColor: '#FFE6E4', color: '#F16063', fontWeight: '700', borderColor: '#FFE6E4'}}/>
                     </StyledAlertDiv>
-                    {/* <StyledButton>
-                        <FiPlus />
-                        <p>Create</p>
-                    </StyledButton> */}
-                </StyledAlertAndButtondiv>
+                </StyledAlertAndButtondiv> */}
+                <Alert/>
             </StyledTitleHeaderDiv>
             <Divider/>
             <StyledHeader>
@@ -148,6 +147,9 @@ export const ProviderModule = (props) => {
                 </Route>
                 <Route path={`${path}/patient`}>
                     <PatientManagement/>
+                </Route>
+                <Route path={`${path}/chatroom`}>
+                    <ChatRoom/>
                 </Route>
             </Switch>
            

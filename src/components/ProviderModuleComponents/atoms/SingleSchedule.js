@@ -10,10 +10,7 @@ import { Drawer, Divider, Badge, Statistic, Avatar, Col, Row} from 'antd';
 import {Link} from 'react-router-dom';
 import { IoMdCalendar, IoIosArrowRoundForward, IoIosPlay, IoMdPeople } from 'react-icons/io';
 import { UserOutlined } from '@ant-design/icons';
-import {TiArrowRight} from 'react-icons/ti';
-import { MdPeopleOutline } from 'react-icons/md'
-import {TimeIcon} from './TimeIcon';
-import {useScreenNameContext} from '../../context/screenNameContext';
+import { GoCalendar } from 'react-icons/go';
 
 import { AppointmentWaitingIcon } from '../../../globalAccets/svgs/AppointmentWaitingIcon';
 
@@ -39,13 +36,21 @@ const TimeAndIcon = (props) => {
     )
 }
 
-const AppointmentDetail = (props) => {
+export const AppointmentDetail = (props) => {
     return (
         <StyledAppointmentDetail>
             <p>Femi Marcus Physiotherapy Checkup</p>
             <div>
                 <Avatar size={10} icon={<UserOutlined />} />
                 <p>Dr. Adebayo</p>
+
+                <div>
+                    <StyledGoCalendar>
+                        <GoCalendar/>
+                    </StyledGoCalendar>
+                  
+                    <p>10:01mins</p>
+                </div>
             </div>        
         </StyledAppointmentDetail>
     )
@@ -69,7 +74,17 @@ const StyledAppointmentDetail = styled.div`
             font-size: 10px;
             margin-left: 5px;
         }
+
+        & > div {
+            margin-left: auto;
+            color: #DA9344;
+            & p{
+                color: #DA9344;
+            }
+        }
     }
+
+    
 
     & > p{
         margin: 0px;
@@ -82,6 +97,23 @@ const StyledAppointmentDetail = styled.div`
     @media ${device.laptop}{
         margin: 0px;
         flex-basis: auto;
+
+        & div{
+        
+
+        & p{
+            
+            font-size: 0.75vw;
+           
+        }
+        }
+
+        & > p{
+       
+        font-size: 0.97vw;
+      
+    }
+
     }
 `
 
@@ -135,10 +167,22 @@ const StyledScheduledTime = styled.div`
             justify-content: flex-start;
             & p{
                 height: fit-content;
+                &:first-child{
+                font-size: 0.97vw;
+            }
+
                 &:nth-child(2){
                     margin-left: 0px; 
+                    font-size:0.75vw;
                 }
             }
             
         }
+`
+
+const StyledGoCalendar = styled.div`
+    border: 1px solid #f4d8ba;
+    border-radius: 25px;
+    font-size: 5px;
+    padding: 3px;
 `
