@@ -156,15 +156,15 @@ export const ChatRoom = (props) => {
      const popContent = (
          <>
          <StyledSingleNotification>
-             <AppointmentDetail/>
+             <AppointmentDetail isProvider={true}/>
              <ActionButtons/>
          </StyledSingleNotification>
          <StyledSingleNotification>
-             <AppointmentDetail/>
+             <AppointmentDetail isProvider={true}/>
              <ActionButtons/>
          </StyledSingleNotification>
          <StyledSingleNotification>
-             <AppointmentDetail/>
+             <AppointmentDetail isProvider={true}/>
              <ActionButtons/>
          </StyledSingleNotification>
          </>

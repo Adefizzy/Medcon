@@ -44,13 +44,13 @@ export const AppointmentDetail = (props) => {
                 <Avatar size={10} icon={<UserOutlined />} />
                 <p>Dr. Adebayo</p>
 
-                <div>
+                {props.isProvider && <div>
                     <StyledGoCalendar>
                         <GoCalendar/>
                     </StyledGoCalendar>
                   
                     <p>10:01mins</p>
-                </div>
+                </div>}
             </div>        
         </StyledAppointmentDetail>
     )
