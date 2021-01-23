@@ -12,7 +12,7 @@ import { FiMoreVertical } from 'react-icons/fi';
 import { MdGroup, MdCallEnd, MdVideocam, MdSettings, MdVideocamOff, MdOpenInBrowser } from 'react-icons/md';
 import { IoMdShareAlt, IoIosMic , IoIosMicOff} from 'react-icons/io';
 import { AiFillCheckCircle } from 'react-icons/ai';
-import { Alert } from './ProviderModuleComponents/atoms/Alert';
+import { AlertWithPopOver as Alert } from './ProviderModuleComponents/atoms/Alert';
 import { AppointmentDetail } from './ProviderModuleComponents/atoms/SingleSchedule';
 import { ActionButtons } from './ProviderModuleComponents/atoms/ActionButtons';
 import { Space } from 'antd';

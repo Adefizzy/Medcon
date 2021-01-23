@@ -8,6 +8,18 @@ import {theme} from '../../../globalAccets/theme';
 
 export const Alert = (props) => {
     return (
+            <StyledAlertAndButtondiv isProvider={props.isProvider}  onClick={props.onClick}>
+                <StyledAlertDiv style={{marginRight: '30px'}}>
+                    <StyledFiBell/>
+                    <Badge count={23} style={{padding:'0px 11px 0px 11px', backgroundColor: props.isProvider? '#DBEDE3' :'#FFE6E4', color: props.isProvider?'#27AE60':'#F16063', fontWeight: '700', borderColor: props.isProvider? '#DBEDE3' :'#FFE6E4'}}/>
+                </StyledAlertDiv>
+            </StyledAlertAndButtondiv>
+    );
+};
+
+
+export const AlertWithPopOver = (props) => {
+    return (
         <StyledPopover placement='bottomRight' content={props.popContent} title={props.popTitle}>
             <StyledAlertAndButtondiv isProvider={props.isProvider}  onClick={props.onClick}>
                 <StyledAlertDiv style={{marginRight: '30px'}}>
@@ -36,6 +48,7 @@ const StyledAlertAndButtondiv = styled.div`
     display:${props => props.isProvider? 'flex' : 'none'};
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     @media ${device.laptop}{
         display: flex;
